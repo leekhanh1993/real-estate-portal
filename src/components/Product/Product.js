@@ -4,10 +4,9 @@ class Product extends Component {
     render() {
         return (
             <div className="container-fluid">
-                <div className="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-
+                <div className="col-xs-2 col-sm-2 col-md-2 col-lg-2 filterstyle">
                     <div className="panel panel-default">
-                        <div className="panel-heading">
+                        <div className="panel-heading ">
                             <h3 className="panel-title">Filter By</h3>
                         </div>
                         <div className="panel-body">
@@ -93,7 +92,6 @@ class Product extends Component {
                             </div>
                         </div>
                     </div>
-
                 </div>
                 <div className="col-xs-10 col-sm-10 col-md-10 col-lg-10">
                     <div className="row" style={{paddingBottom: 10}}>
