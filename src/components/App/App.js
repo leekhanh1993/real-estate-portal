@@ -3,22 +3,27 @@ import './App.css';
 import Header from '../Header/Header';
 import Navigation from '../Navigation/Navigation';
 import Footer from '../Footer/Footer';
+import { BrowserRouter as Router } from "react-router-dom";
+import RouterUrl from '../RouterUrl/RouterUrl';
 
 class App extends Component {
   render() {
     return (
-      <div>
-        {/* Header */}
-        <Header/>
-        {/* Navigation */}
-        <Navigation/>
-        {/* Content */}
-        <div className="content">
-          <h1>Content</h1>
+      <Router>
+        <div>
+          {/* Header */}
+          <Header />
+          {/* Navigation */}
+          <Navigation />
+          {/* Content */}
+          <div className="content">
+            <RouterUrl/>
+          </div>
+          {/* Footer */}
+          <Footer />
         </div>
-        {/* Footer */}
-        <Footer/>
-      </div>
+      </Router>
+
     );
   }
 }

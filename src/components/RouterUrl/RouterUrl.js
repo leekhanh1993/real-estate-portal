@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { Route } from "react-router-dom";
+import Product from '../Product/Product';
+import ManageProject from '../Project/ManageProject';
 
 class RouterUrl extends Component {
     render() {
         return (
             <div>
-                <Route exact path="/" component={product} />
-                <Route path="/product" component={product} />
-                <Route path="/topics" component={Topics} />
+                <Route exact path="/" component={Product} />
+                <Route path="/product" component={Product} />
+                <Route path="/manageproject" component={ManageProject} />
             </div>
         );
     }
