@@ -4,6 +4,7 @@ class AddAdvertisement extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            id:'',
             title: '',
             price: '',
             imageUrl: '',
@@ -46,7 +47,7 @@ class AddAdvertisement extends Component {
     }
 
     addAdvertisement(){
-        console.log(this.state)
+        this.props.addNewAd(this.state)
     }
     render() {
         return (
@@ -221,6 +222,7 @@ class AddAdvertisement extends Component {
                                 className="btn btn-success" 
                                 style={{ marginRight: 10 }}
                                 onClick={this.addAdvertisement.bind(this)}
+                                data-dismiss="modal"
                                 >Add</a>
                                 <a className="btn btn-danger" data-dismiss="modal">Close</a>
                             </div>
