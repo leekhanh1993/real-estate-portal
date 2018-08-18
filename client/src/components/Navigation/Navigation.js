@@ -13,9 +13,7 @@ class Navigation extends Component {
                                 <span className="icon-bar" />
                                 <span className="icon-bar" />
                             </button>
-                            <NavLink
-                            to="/"
-                            ><a className="navbar-brand">LK Company</a></NavLink>
+                            <NavLink to="/" className="navbar-brand">LK Company</NavLink>
                         </div>
                         <div className="collapse navbar-collapse" id="myNavbar">
                             <ul className="nav navbar-nav">
@@ -27,7 +25,7 @@ class Navigation extends Component {
                                 >Manage Project</NavLink></li>
                             </ul>
                             <ul className="nav navbar-nav navbar-right">
-                                <li><a style={{cursor: 'pointer'}}><span className="glyphicon glyphicon-user" /> User Control</a></li>
+                                <li><NavLink to="/manageproduct" style={{cursor: 'pointer'}}><span className="glyphicon glyphicon-user" /> User Control</NavLink></li>
                             </ul>
                         </div>
                     </div>

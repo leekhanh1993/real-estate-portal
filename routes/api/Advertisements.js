@@ -20,6 +20,7 @@ router.post('/', (req, res)=>{
         title: req.body.title,
         price: req.body.price,
         area: req.body.area,
+        imageUrl: req.body.imageUrl,
         numbedrooms: req.body.numbedrooms,
         numfloors: req.body.numfloors,
         direction: req.body.direction,
