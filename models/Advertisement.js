@@ -8,7 +8,7 @@ const AdvertisementSchema = new Schema({
         required: true
     },
     price: {
-        type: Number,
+        type: String,
         required: true
     },
     imageUrl: {
@@ -20,11 +20,11 @@ const AdvertisementSchema = new Schema({
         required: true
     },
     numbedrooms: {
-        type: Number,
+        type: String,
         required: true
     },
     numfloors: {
-        type: Number,
+        type: String,
         required: true
     },
     direction: {

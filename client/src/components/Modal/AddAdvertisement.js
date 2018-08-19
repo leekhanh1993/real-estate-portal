@@ -4,7 +4,6 @@ class AddAdvertisement extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            id:'',
             title: '',
             price: '',
             imageUrl: '',
@@ -48,6 +47,7 @@ class AddAdvertisement extends Component {
 
     addAdvertisement(){
         this.props.addNewAd(this.state)
+        this.clearForm();
     }
     render() {
         return (
@@ -188,7 +188,6 @@ class AddAdvertisement extends Component {
                                             </div>
                                         </div>
                                     </div>
-
                                     <div className="row">
                                         <div className="col-xs-6 col-sm-6 col-md-6 col-lg-6">
                                             <label>Post Date</label>
@@ -210,6 +209,32 @@ class AddAdvertisement extends Component {
                                                     placeholder="Expire Date"
                                                     name="expiredDate"
                                                     value={this.state.expiredDate}
+                                                    onChange={this.onChange.bind(this)}
+                                                />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="row">
+                                        <div className="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                            <label>ID User</label>
+                                            <input
+                                                type="text"
+                                                className="form-control"
+                                                placeholder="ID User"
+                                                name="idUser"
+                                                value={this.state.idUser}
+                                                onChange={this.onChange.bind(this)}
+                                            />
+                                        </div>
+                                        <div className="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                            <div className="form-group">
+                                                <label>ID Project</label>
+                                                <input
+                                                    type="text"
+                                                    className="form-control"
+                                                    placeholder="ID Project"
+                                                    name="idProject"
+                                                    value={this.state.idProject}
                                                     onChange={this.onChange.bind(this)}
                                                 />
                                             </div>

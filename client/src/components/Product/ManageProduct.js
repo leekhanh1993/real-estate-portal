@@ -1,55 +1,43 @@
 import React, { Component } from 'react';
 import AddAdvertisement from '../Modal/AddAdvertisement';
 import uuid from 'uuid'
+import {connect} from 'react-redux'
+import {getADs, deleteAD, addAD} from './../../actions/adActions'
+
 
 class ManageProduct extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            ads: [
-                {
-                    id: uuid(),
-                    title: '123',
-                    price: '123',
-                    imageUrl: '',
-                    area: '123',
-                    numbedrooms: '123',
-                    numfloors: '123',
-                    direction: '123',
-                    contactInfo: '123',
-                    address: '123',
-                    postDate: '123123',
-                    expiredDate: '123',
-                    idUser: '123',
-                    idProject: '123'
-                }
-            ]
-        }
+    
+    componentDidMount(){
+        this.props.getADs()
     }
     addNewAd(ad) {
-        this.setState((state = this.state) => ({
-            ads: [...state.ads, {
-                id: uuid(),
-                title: ad.title,
-                price: ad.price,
-                imageUrl: ad.imageUrl,
-                area: ad.area,
-                numbedrooms: ad.numbedrooms,
-                numfloors: ad.numfloors,
-                direction: ad.direction,
-                contactInfo: ad.contactInfo,
-                address: ad.address,
-                postDate: ad.postDate,
-                expiredDate: ad.expiredDate,
-                idUser: ad.idUser,
-                idProject: ad.idProject
-            }]
-        }))
+        console.log(ad)
+        this.props.addAD(ad)
+        // this.setState((state = this.state) => ({
+        //     ads: [...state.ads, {
+        //         id: uuid(),
+        //         title: ad.title,
+        //         price: ad.price,
+        //         imageUrl: ad.imageUrl,
+        //         area: ad.area,
+        //         numbedrooms: ad.numbedrooms,
+        //         numfloors: ad.numfloors,
+        //         direction: ad.direction,
+        //         contactInfo: ad.contactInfo,
+        //         address: ad.address,
+        //         postDate: ad.postDate,
+        //         expiredDate: ad.expiredDate,
+        //         idUser: ad.idUser,
+        //         idProject: ad.idProject
+        //     }]
+        // }))
+    }
+    onDelete = (id)=>{
+        this.props.deleteAD(id);
     }
     render() {
-        var { ads } = this.state;
+        var { ads } = this.props.ad;
         var listAds = ads.map((ad, index) => {
-            console.log(ad)
             return <div key={index}>
                 <div className="col-xs-4 col-sm-4 col-md-4 col-lg-4">
                     <div className="thumbnail">
@@ -62,6 +50,9 @@ class ManageProduct extends Component {
                             <p>Price: {ad.price} $</p>
                             <p>
                                 <a className="btn btn-primary">Detail</a>
+                                <a 
+                                onClick={this.onDelete.bind(this, ad.id)}
+                                className="btn btn-danger">Delete</a>
                             </p>
                         </div>
                     </div>
@@ -92,72 +83,16 @@ class ManageProduct extends Component {
                 </div>
                 <div className="row">
                     {listAds}
-                    <div className="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                        <div className="thumbnail">
-                            <img src="https://via.placeholder.com/350x350" />
-                            <div className="caption">
-                                <h3>Selling room in distrcit 7</h3>
-                                <p>Area: District 7</p>
-                                <p>Number of bedrooms: 2</p>
-                                <p>Number of floors: 2</p>
-                                <p>Price: 5000$</p>
-                                <p>
-                                    <a className="btn btn-primary">Detail</a>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                        <div className="thumbnail">
-                            <img src="https://via.placeholder.com/350x350" />
-                            <div className="caption">
-                                <h3>Selling room in distrcit 2</h3>
-                                <p>Area: District 7</p>
-                                <p>Number of bedrooms: 2</p>
-                                <p>Number of floors: 2</p>
-                                <p>Price: 5000$</p>
-                                <p>
-                                    <a className="btn btn-primary">Detail</a>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                        <div className="thumbnail">
-                            <img src="https://via.placeholder.com/350x350" />
-                            <div className="caption">
-                                <h3>Selling room in distrcit 4</h3>
-                                <p>Area: District 7</p>
-                                <p>Number of bedrooms: 2</p>
-                                <p>Number of floors: 2</p>
-                                <p>Price: 5000$</p>
-                                <p>
-                                    <a className="btn btn-primary">Detail</a>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                        <div className="thumbnail">
-                            <img src="https://via.placeholder.com/350x350" />
-                            <div className="caption">
-                                <h3>Selling room in distrcit 1</h3>
-                                <p>Area: District 7</p>
-                                <p>Number of bedrooms: 2</p>
-                                <p>Number of floors: 2</p>
-                                <p>Price: 5000$</p>
-                                <p>
-                                    <a className="btn btn-primary">Detail</a>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         );
     }
 }
 
-export default ManageProduct;
+const mapStateToProps = state => {
+    return {
+        ad: state.ads
+    }
+}
+
+export default connect(mapStateToProps,{getADs, deleteAD, addAD})(ManageProduct);
