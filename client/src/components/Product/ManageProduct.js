@@ -37,6 +37,7 @@ class ManageProduct extends Component {
     }
     render() {
         var { ads } = this.props.ad;
+        console.log(ads)
         var listAds = ads.map((ad, index) => {
             return <div key={index}>
                 <div className="col-xs-4 col-sm-4 col-md-4 col-lg-4">
@@ -51,7 +52,7 @@ class ManageProduct extends Component {
                             <p>
                                 <a className="btn btn-primary">Detail</a>
                                 <a 
-                                onClick={this.onDelete.bind(this, ad.id)}
+                                onClick={this.onDelete.bind(this, ad._id)}
                                 className="btn btn-danger">Delete</a>
                             </p>
                         </div>
