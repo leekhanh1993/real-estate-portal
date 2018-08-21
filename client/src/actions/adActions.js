@@ -10,11 +10,12 @@ export const getADs = () => dispacth => {
         payload: res.data
     }))
 }
-export const deleteAD = (id) => {
-    return{
+export const deleteAD = id => dispacth => {
+    axios.delete(`/api/advertisements/${id}`)
+    .then(res => dispacth({
         type: DELETE_AD,
         payload: id
-    }
+    }))
 }
 export const addAD = ad => dispacth => {
     axios

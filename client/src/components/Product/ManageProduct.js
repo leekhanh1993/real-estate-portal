@@ -11,7 +11,6 @@ class ManageProduct extends Component {
         this.props.getADs()
     }
     addNewAd(ad) {
-        console.log(ad)
         this.props.addAD(ad)
         // this.setState((state = this.state) => ({
         //     ads: [...state.ads, {
@@ -51,7 +50,7 @@ class ManageProduct extends Component {
                             <p>
                                 <a className="btn btn-primary">Detail</a>
                                 <a 
-                                onClick={this.onDelete.bind(this, ad.id)}
+                                onClick={this.onDelete.bind(this, ad._id)}
                                 className="btn btn-danger">Delete</a>
                             </p>
                         </div>

@@ -18,10 +18,9 @@ export default function (state = initialState, action) {
         case DELETE_AD:
             return {
                 ...state,
-                ads: state.ads.filter(item => item.id !== action.payload)
+                ads: state.ads.filter(item => item._id !== action.payload)
             };
         case ADD_AD:
-        console.log(action.payload)
             return {
                 ...state,
                 ads: [action.payload, ...state.ads]
