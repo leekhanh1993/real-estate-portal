@@ -36,6 +36,7 @@ class ManageProduct extends Component {
     }
     render() {
         var { ads } = this.props.ad;
+        console.log(ads)
         var listAds = ads.map((ad, index) => {
             return <div key={index}>
                 <div className="col-xs-4 col-sm-4 col-md-4 col-lg-4">
