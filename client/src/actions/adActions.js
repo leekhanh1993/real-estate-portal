@@ -16,6 +16,7 @@ export const deleteAD = id => dispacth => {
         type: DELETE_AD,
         payload: id
     }))
+   
 }
 export const addAD = ad => dispacth => {
     axios

@@ -37,17 +37,22 @@ router.post('/', (req, res)=>{
 //@desc Delete an advertisements
 //@access Public
 router.delete('/:id', (req, res)=>{
-    Advertisement.findById(req.params.id)
-    .then(item => item.remove().then(()=> res.json({success: true})))
+    Advertisement.findByIdAndRemove({_id: req.params.id})
+    .then(removedAd => res.send(removedAd))
     .catch(err => res.status(404).json({success: false}))
+    // Advertisement.findById(req.params.id)
+    // .then(item => item.remove().then(()=> res.json({success: true})))
+    // .catch(err => res.status(404).json({success: false}))
 })
 
-//@route GET api/advertisements
-//@desc GET an advertisements
+//@route UPDATE api/advertisements
+//@desc UPDATE an advertisements
 //@access Public
-router.get('/:_id', (req, res)=>{
-    Advertisement.findById(req.params._id)
-    .then(() => res.json({fix: "dung roi"}))
+router.put('/:_id', (req, res)=>{
+    var update = req.body;
+    Advertisement.findByIdAndUpdate(req.params._id, update)
+    .then(() => res.json({update: true}))
+    .catch(err => res.status(404).json({update: false}))
 })
 
 
