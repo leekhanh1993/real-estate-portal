@@ -84,7 +84,7 @@ class AddAdvertisement extends Component {
                                             <div className="form-group">
                                                 <label>Price</label>
                                                 <input
-                                                    type="text"
+                                                    type="number"
                                                     className="form-control"
                                                     placeholder="Price"
                                                     name="price"
@@ -97,7 +97,7 @@ class AddAdvertisement extends Component {
                                             <div className="form-group">
                                                 <label>Image</label>
                                                 <input
-                                                    type="text"
+                                                    type="url"
                                                     className="form-control"
                                                     placeholder="Image url"
                                                     name="imageUrl"
@@ -124,7 +124,7 @@ class AddAdvertisement extends Component {
                                             <div className="form-group">
                                                 <label>Number of bedrooms</label>
                                                 <input
-                                                    type="text"
+                                                    type="number"
                                                     className="form-control"
                                                     placeholder="Number of bedrooms"
                                                     name="numbedrooms"
@@ -139,7 +139,7 @@ class AddAdvertisement extends Component {
                                         <div className="col-xs-6 col-sm-6 col-md-6 col-lg-6">
                                             <label>Number of floors</label>
                                             <input
-                                                type="text"
+                                                type="number"
                                                 className="form-control"
                                                 placeholder="Number of floors"
                                                 name="numfloors"

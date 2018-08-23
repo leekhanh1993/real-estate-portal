@@ -38,7 +38,7 @@ router.post('/', (req, res)=>{
 //@desc Delete an advertisements
 //@access Public
 router.delete('/:_id', (req, res)=>{
-    Advertisement.findByIdAndRemove({_id: req.params._id})
+    Advertisement.findByIdAndRemove(req.params._id)
     .then(removedAd => res.send(removedAd))
     .catch(err => res.status(404).json({success: false}))
     // Advertisement.findById(req.params.id)

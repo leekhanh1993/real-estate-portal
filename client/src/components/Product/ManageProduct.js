@@ -29,11 +29,15 @@ class ManageProduct extends Component {
                             <p>Number of bedrooms: {ad.numbedrooms}</p>
                             <p>Number of floors: {ad.numfloors}</p>
                             <p>Price: {ad.price} $</p>
+                            <hr/>
                             <p>
-                                <Link className="btn btn-primary" to={"/edit/"+ ad._id}>Edit</Link>
+                                <Link style={{marginRight: 10}} className="btn btn-primary" to={"/edit/"+ ad._id}>
+                                <span className="glyphicon glyphicon-edit"></span> Edit
+                                </Link>
                                 <a 
                                 onClick={this.onDelete.bind(this, ad._id)}
-                                className="btn btn-danger">Delete</a>
+                                className="btn btn-danger">
+                                <span className="glyphicon glyphicon-log-out"></span> Delete</a>
                             </p>
                         </div>
                     </div>
