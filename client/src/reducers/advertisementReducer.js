@@ -1,4 +1,3 @@
-import uuid from 'uuid'
 import { GET_ADS, DELETE_AD, ADD_AD, ADS_LOADING } from './../actions/types'
 
 

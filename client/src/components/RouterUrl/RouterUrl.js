@@ -3,6 +3,7 @@ import { Route, Switch } from "react-router-dom";
 import Product from '../Product/Product';
 import ManageProject from '../Project/ManageProject';
 import ManageProduct from '../Product/ManageProduct';
+import EditProduct from '../Product/EditProduct';
 
 class RouterUrl extends Component {
     render() {
@@ -13,6 +14,7 @@ class RouterUrl extends Component {
                     <Route path="/product" component={Product} />
                     <Route path="/manageproduct" component={ManageProduct} />
                     <Route path="/manageproject" component={ManageProject} />
+                    <Route path="/edit/:_id" component={EditProduct} />
                     <Route component={Product} />
                 </Switch>
             </div>

@@ -54,6 +54,14 @@ router.put('/:_id', (req, res)=>{
     .then(() => res.json({update: true}))
     .catch(err => res.status(404).json({update: false}))
 })
+//@route GET api/advertisements
+//@desc GET an advertisements
+//@access Public
+router.get('/:_id', (req, res)=>{
+    Advertisement.findById(req.params._id)
+    .then(advertisement => res.json(advertisement))
+    .catch(err => res.status(404).json({get: false}))
+})
 
 
 module.exports = router;

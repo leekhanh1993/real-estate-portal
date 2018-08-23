@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import AddAdvertisement from '../Modal/AddAdvertisement';
-import uuid from 'uuid'
 import {connect} from 'react-redux'
 import {getADs, deleteAD, addAD} from './../../actions/adActions'
+import {Link} from 'react-router-dom'
 
 
 class ManageProduct extends Component {
@@ -48,7 +48,7 @@ class ManageProduct extends Component {
                             <p>Number of floors: {ad.numfloors}</p>
                             <p>Price: {ad.price} $</p>
                             <p>
-                                <a className="btn btn-primary">Edit</a>
+                                <Link className="btn btn-primary" to={"/edit/"+ ad._id}>Edit</Link>
                                 <a 
                                 onClick={this.onDelete.bind(this, ad._id)}
                                 className="btn btn-danger">Delete</a>
