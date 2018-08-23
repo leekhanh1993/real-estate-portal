@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import { getADs, getAD } from './../../actions/adActions'
+import { getADs, getAD, editAD } from './../../actions/adActions'
+import { Redirect } from 'react-router-dom'
 
 class EditProduct extends Component {
     constructor(props) {
@@ -18,7 +19,8 @@ class EditProduct extends Component {
             postDate: '',
             expiredDate: '',
             idUser: '',
-            idProject: ''
+            idProject: '',
+            isRedirect: false
         }
     }
     componentWillReceiveProps(nextProps) {
@@ -50,10 +52,37 @@ class EditProduct extends Component {
             [name]: value
         })
     }
-    updateAD() {
-        console.log(this.state)
+    updateAD(e) {
+        e.preventDefault();
+        var update = {
+            title: this.state.title,
+            price: this.state.price,
+            imageUrl: this.state.imageUrl,
+            area: this.state.area,
+            numbedrooms: this.state.numbedrooms,
+            numfloors: this.state.numfloors,
+            direction: this.state.direction,
+            contactInfo: this.state.contactInfo,
+            address: this.state.address,
+            postDate: this.state.postDate,
+            expiredDate: this.state.expiredDate,
+            idUser: this.state.idUser,
+            idProject: this.state.idProject
+        }
+        this.props.editAD(update, this.props.match.params._id)
+        this.setState({
+            isRedirect: !this.state.isRedirect
+        })
+    }
+    onCancel(){
+        this.setState({
+            isRedirect: !this.state.isRedirect
+        })
     }
     render() {
+        if (this.state.isRedirect) {
+            return <Redirect to="/manageproduct" />
+        }
         return (
             <div className="container">
                 <div className="panel panel-default">
@@ -61,7 +90,7 @@ class EditProduct extends Component {
                         <h3 className="panel-title text-center">Edit Advertisement</h3>
                     </div>
                     <div className="panel-body">
-                        <form>
+                        <form onSubmit={this.updateAD.bind(this)}>
                             <div className="row">
                                 <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                                     <div className="form-group">
@@ -73,6 +102,7 @@ class EditProduct extends Component {
                                             name="title"
                                             value={this.state.title}
                                             onChange={this.onChange.bind(this)}
+                                            required
                                         />
                                     </div>
                                 </div>
@@ -83,12 +113,13 @@ class EditProduct extends Component {
                                     <div className="form-group">
                                         <label>Price</label>
                                         <input
-                                            type="text"
+                                            type="number"
                                             className="form-control"
                                             placeholder="Price"
                                             name="price"
-                                            value={this.state.price || ''}
+                                            value={this.state.price}
                                             onChange={this.onChange.bind(this)}
+                                            required
                                         />
                                     </div>
                                 </div>
@@ -96,12 +127,13 @@ class EditProduct extends Component {
                                     <div className="form-group">
                                         <label>Image</label>
                                         <input
-                                            type="text"
+                                            type="url"
                                             className="form-control"
                                             placeholder="Image url"
                                             name="imageUrl"
-                                            value={this.state.imageUrl || ''}
+                                            value={this.state.imageUrl}
                                             onChange={this.onChange.bind(this)}
+                                            required
                                         />
                                     </div>
                                 </div>
@@ -115,20 +147,22 @@ class EditProduct extends Component {
                                         className="form-control"
                                         placeholder="Area"
                                         name="area"
-                                        value={this.state.area || ''}
+                                        value={this.state.area}
                                         onChange={this.onChange.bind(this)}
+                                        required
                                     />
                                 </div>
                                 <div className="col-xs-6 col-sm-6 col-md-6 col-lg-6">
                                     <div className="form-group">
                                         <label>Number of bedrooms</label>
                                         <input
-                                            type="text"
+                                            type="number"
                                             className="form-control"
                                             placeholder="Number of bedrooms"
                                             name="numbedrooms"
-                                            value={this.state.numbedrooms || ''}
+                                            value={this.state.numbedrooms}
                                             onChange={this.onChange.bind(this)}
+                                            required
                                         />
                                     </div>
                                 </div>
@@ -138,12 +172,13 @@ class EditProduct extends Component {
                                 <div className="col-xs-6 col-sm-6 col-md-6 col-lg-6">
                                     <label>Number of floors</label>
                                     <input
-                                        type="text"
+                                        type="number"
                                         className="form-control"
                                         placeholder="Number of floors"
                                         name="numfloors"
-                                        value={this.state.numfloors || ''}
+                                        value={this.state.numfloors}
                                         onChange={this.onChange.bind(this)}
+                                        required
                                     />
                                 </div>
                                 <div className="col-xs-6 col-sm-6 col-md-6 col-lg-6">
@@ -154,8 +189,9 @@ class EditProduct extends Component {
                                             className="form-control"
                                             placeholder="Direction"
                                             name="direction"
-                                            value={this.state.direction || ''}
+                                            value={this.state.direction}
                                             onChange={this.onChange.bind(this)}
+                                            required
                                         />
                                     </div>
                                 </div>
@@ -171,6 +207,7 @@ class EditProduct extends Component {
                                         name="contactInfo"
                                         value={this.state.contactInfo || ''}
                                         onChange={this.onChange.bind(this)}
+                                        required
                                     />
                                 </div>
                                 <div className="col-xs-6 col-sm-6 col-md-6 col-lg-6">
@@ -181,8 +218,9 @@ class EditProduct extends Component {
                                             className="form-control"
                                             placeholder="Address"
                                             name="address"
-                                            value={this.state.address || ''}
+                                            value={this.state.address}
                                             onChange={this.onChange.bind(this)}
+                                            required
                                         />
                                     </div>
                                 </div>
@@ -191,24 +229,26 @@ class EditProduct extends Component {
                                 <div className="col-xs-6 col-sm-6 col-md-6 col-lg-6">
                                     <label>Post Date</label>
                                     <input
-                                        type="text"
+                                        type="date"
                                         className="form-control"
                                         placeholder="Post Date"
                                         name="postDate"
-                                        value={this.state.postDate || ''}
+                                        value={this.state.postDate}
                                         onChange={this.onChange.bind(this)}
+                                        required
                                     />
                                 </div>
                                 <div className="col-xs-6 col-sm-6 col-md-6 col-lg-6">
                                     <div className="form-group">
                                         <label>Expire Date</label>
                                         <input
-                                            type="text"
+                                            type="date"
                                             className="form-control"
                                             placeholder="Expire Date"
                                             name="expiredDate"
-                                            value={this.state.expiredDate || ''}
+                                            value={this.state.expiredDate}
                                             onChange={this.onChange.bind(this)}
+                                            required
                                         />
                                     </div>
                                 </div>
@@ -221,8 +261,9 @@ class EditProduct extends Component {
                                         className="form-control"
                                         placeholder="ID User"
                                         name="idUser"
-                                        value={this.state.idUser || ''}
+                                        value={this.state.idUser}
                                         onChange={this.onChange.bind(this)}
+                                        required
                                     />
                                 </div>
                                 <div className="col-xs-6 col-sm-6 col-md-6 col-lg-6">
@@ -233,8 +274,9 @@ class EditProduct extends Component {
                                             className="form-control"
                                             placeholder="ID Project"
                                             name="idProject"
-                                            value={this.state.idProject || ''}
+                                            value={this.state.idProject}
                                             onChange={this.onChange.bind(this)}
+                                            required
                                         />
                                     </div>
                                 </div>
@@ -244,11 +286,12 @@ class EditProduct extends Component {
                                     <div className="form-group">
                                         <button
                                             style={{ marginRight: 10 }}
-                                            type="button"
-                                            onClick={this.updateAD.bind(this)}
+                                            type="submit"
+                                            // onClick={this.updateAD.bind(this)}
                                             className="btn btn-success"
                                         >Update</button>
                                         <button
+                                            onClick={this.onCancel.bind(this)}
                                             type="button"
                                             className="btn btn-danger"
                                         >Cancel</button>
@@ -267,4 +310,4 @@ const mapStateToProps = state => {
         ad: state.ad
     }
 }
-export default connect(mapStateToProps, { getADs, getAD })(EditProduct);
+export default connect(mapStateToProps, { getADs, getAD,editAD })(EditProduct);

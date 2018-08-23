@@ -26,6 +26,7 @@ router.post('/', (req, res)=>{
         direction: req.body.direction,
         contactInfo: req.body.contactInfo,
         address: req.body.address,
+        postDate: req.body.postDate,
         expiredDate: req.body.expiredDate,
         idUser: req.body.idUser,
         idProject: req.body.idProject
@@ -36,8 +37,8 @@ router.post('/', (req, res)=>{
 //@route DELETE api/advertisements
 //@desc Delete an advertisements
 //@access Public
-router.delete('/:id', (req, res)=>{
-    Advertisement.findByIdAndRemove({_id: req.params.id})
+router.delete('/:_id', (req, res)=>{
+    Advertisement.findByIdAndRemove({_id: req.params._id})
     .then(removedAd => res.send(removedAd))
     .catch(err => res.status(404).json({success: false}))
     // Advertisement.findById(req.params.id)

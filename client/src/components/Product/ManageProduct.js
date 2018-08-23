@@ -12,24 +12,6 @@ class ManageProduct extends Component {
     }
     addNewAd(ad) {
         this.props.addAD(ad)
-        // this.setState((state = this.state) => ({
-        //     ads: [...state.ads, {
-        //         id: uuid(),
-        //         title: ad.title,
-        //         price: ad.price,
-        //         imageUrl: ad.imageUrl,
-        //         area: ad.area,
-        //         numbedrooms: ad.numbedrooms,
-        //         numfloors: ad.numfloors,
-        //         direction: ad.direction,
-        //         contactInfo: ad.contactInfo,
-        //         address: ad.address,
-        //         postDate: ad.postDate,
-        //         expiredDate: ad.expiredDate,
-        //         idUser: ad.idUser,
-        //         idProject: ad.idProject
-        //     }]
-        // }))
     }
     onDelete = (id)=>{
         this.props.deleteAD(id);
@@ -40,7 +22,7 @@ class ManageProduct extends Component {
             return <div key={index}>
                 <div className="col-xs-4 col-sm-4 col-md-4 col-lg-4">
                     <div className="thumbnail">
-                        <img src={ad.imageUrl === '' ? "https://via.placeholder.com/350x350" : ad.imageUrl} />
+                        <img style={{width: '100%', height: 500}} src={ad.imageUrl === '' ? "https://via.placeholder.com/350x350" : ad.imageUrl} />
                         <div className="caption">
                             <h3>{ad.title}</h3>
                             <p>Area: {ad.area}</p>

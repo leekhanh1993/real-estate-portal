@@ -36,6 +36,11 @@ export const addAD = ad => dispatch => {
         payload: res.data
     }))
 }
+export const editAD = (updatedAD, id) => dispatch => {
+    axios
+    .put(`/api/advertisements/${id}`, updatedAD)
+    .then(() => {getADs()})
+}
 export const setAdsLoading = () => {
     return{
         type: ADS_LOADING

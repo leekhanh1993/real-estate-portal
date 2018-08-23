@@ -40,8 +40,8 @@ const AdvertisementSchema = new Schema({
         required: true
     },
     postDate: {
-        type: Date,
-        default: Date.now
+        type: String,
+        required: true
     },
     expiredDate: {
         type: String,

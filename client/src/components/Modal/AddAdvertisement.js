@@ -192,7 +192,7 @@ class AddAdvertisement extends Component {
                                         <div className="col-xs-6 col-sm-6 col-md-6 col-lg-6">
                                             <label>Post Date</label>
                                             <input
-                                                type="text"
+                                                type="date"
                                                 className="form-control"
                                                 placeholder="Post Date"
                                                 name="postDate"
@@ -204,7 +204,7 @@ class AddAdvertisement extends Component {
                                             <div className="form-group">
                                                 <label>Expire Date</label>
                                                 <input
-                                                    type="text"
+                                                    type="date"
                                                     className="form-control"
                                                     placeholder="Expire Date"
                                                     name="expiredDate"
