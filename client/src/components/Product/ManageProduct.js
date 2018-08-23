@@ -49,7 +49,7 @@ class ManageProduct extends Component {
                             <p>Number of floors: {ad.numfloors}</p>
                             <p>Price: {ad.price} $</p>
                             <p>
-                                <a className="btn btn-primary">Detail</a>
+                                <a className="btn btn-primary">Edit</a>
                                 <a 
                                 onClick={this.onDelete.bind(this, ad._id)}
                                 className="btn btn-danger">Delete</a>
