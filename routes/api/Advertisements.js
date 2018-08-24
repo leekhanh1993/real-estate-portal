@@ -31,7 +31,7 @@ router.post('/', (req, res)=>{
         idUser: req.body.idUser,
         idProject: req.body.idProject
     })
-    newAdvertisement.save().then(item => res.json(item))
+    newAdvertisement.save().then(advertisement => res.json(advertisement))
 })
 
 //@route DELETE api/advertisements

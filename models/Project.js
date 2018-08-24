@@ -11,7 +11,7 @@ const ProjectSchema = new Schema({
         type: String,
         required: true
     },
-    type:{
+    typePro:{
         type: String,
         required: true
     },
