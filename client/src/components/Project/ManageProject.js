@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import AddProject from '../Modal/AddProject';
 import { connect } from 'react-redux'
-import { addPRO, getPROs } from './../../actions/proActions'
+import { addPRO, getPROs, deletePRO } from './../../actions/proActions'
+import {Link} from 'react-router-dom'
 
 class ManageProject extends Component {
     componentDidMount() {
@@ -10,11 +11,13 @@ class ManageProject extends Component {
     addNewPro(newPRO) {
         this.props.addPRO(newPRO)
     }
+    onRemove(id){
+        this.props.deletePRO(id);
+    }
     render() {
         var projects = this.props.projects.pros;
-        console.log(this.props.projects.pros)
         var listAllPros = projects.map((pro, index) => {
-            return <tr key={index}>
+            return <tr key={index} className="text-center">
                 <td>{index + 1}</td>
                 <td>{pro.name}</td>
                 <td>{pro.owner}</td>
@@ -23,8 +26,19 @@ class ManageProject extends Component {
                 <td>{pro.startYear}</td>
                 <td>{pro.endYear}</td>
                 <td>
-                    <button type="button" className="btn btn-default">Edit</button>
-                    <button type="button" className="btn btn-default">Remove</button>
+                    <Link 
+                    style={{marginRight: 10}}
+                    to={"/edit-project/" + pro._id}
+                    type="button" 
+                    className="btn btn-primary">
+                    <span className="glyphicon glyphicon-edit"></span> Edit
+                    </Link>
+                    <a 
+                    onClick={()=>this.onRemove(pro._id)}
+                    type="button" 
+                    className="btn btn-danger">
+                    <span className="glyphicon glyphicon-remove"></span> Remove
+                    </a>
                 </td>
             </tr>
         })
@@ -76,4 +90,4 @@ const mapStateToProps = state => {
         projects: state.pros
     }
 }
-export default connect(mapStateToProps, { getPROs, addPRO })(ManageProject);
+export default connect(mapStateToProps, { getPROs, addPRO, deletePRO })(ManageProject);

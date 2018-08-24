@@ -32,7 +32,6 @@ class AddProject extends Component {
     }
 
     addProject() {
-        console.log(this.state)
         this.props.addNewPro(this.state)
         this.clearForm();
     }
@@ -89,6 +88,7 @@ class AddProject extends Component {
                                                     className="form-control"
                                                     required="required"
                                                     name="typePro"
+                                                    value={this.state.typePro}
                                                     onChange={this.onChange.bind(this)}
                                                 >
                                                     <option value="House">House</option>

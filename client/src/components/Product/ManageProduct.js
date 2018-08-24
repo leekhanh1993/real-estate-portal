@@ -22,7 +22,7 @@ class ManageProduct extends Component {
             return <div key={index}>
                 <div className="col-xs-4 col-sm-4 col-md-4 col-lg-4">
                     <div className="thumbnail">
-                        <img style={{width: 350, height: 350}} src={ad.imageUrl === '' ? "https://via.placeholder.com/350x350" : ad.imageUrl} />
+                        <img alt="" style={{width: 350, height: 350}} src={ad.imageUrl === '' ? "https://via.placeholder.com/350x350" : ad.imageUrl} />
                         <div className="caption">
                             <h3>{ad.title}</h3>
                             <p>Area: {ad.area}</p>
