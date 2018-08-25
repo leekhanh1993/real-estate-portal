@@ -41,6 +41,9 @@
     $('#addUser').on('shown.bs.modal', function () {
       $('#registerUserForm').bootstrapValidator('resetForm', true);
     });
+    $('#closeRegisterUser').click(function () {
+      $('#addUser').modal('toggle');
+    });
     $('#registerUserForm').bootstrapValidator({
       feedbackIcons: {
         valid: 'glyphicon glyphicon-ok',
@@ -87,7 +90,7 @@
       }
     }).on('success.form.bv', function (e) {
       e.preventDefault();
-      $('#addUser').modal('hide');
+      $('#addUser').modal('toggle');
     });
   });
 </script>

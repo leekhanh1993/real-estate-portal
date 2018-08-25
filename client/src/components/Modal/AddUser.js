@@ -31,6 +31,9 @@ class AddUser extends Component {
         this.clearForm();
         console.log(this.state)
     }
+    closeRegUser() {
+        this.clearForm();
+    }
     render() {
         return (
             <div>
@@ -40,7 +43,6 @@ class AddUser extends Component {
                         {/* Modal content*/}
                         <div className="modal-content">
                             <div className="modal-header">
-                                <button type="button" className="close" data-dismiss="modal">×</button>
                                 <h4 className="modal-title text-center">Create User</h4>
                             </div>
                             <div className="modal-body">
@@ -103,10 +105,14 @@ class AddUser extends Component {
                                                 type="submit"
                                                 className="btn btn-success"
                                                 style={{ marginRight: 10 }}
-                                            // onClick={this.createUser.bind(this)}
-                                            // data-dismiss="modal"
                                             >Create</button>
-                                            <a className="btn btn-danger" data-dismiss="modal">Close</a>
+                                            <button
+                                                type="button"
+                                                onClick={this.closeRegUser.bind(this)}
+                                                className="btn btn-danger"
+                                                data-dismiss="modal"
+                                                // id='closeRegisterUser'
+                                            >Close</button>
                                         </div>
                                     </div>
                                 </form>
