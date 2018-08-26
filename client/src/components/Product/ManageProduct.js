@@ -17,8 +17,10 @@ class ManageProduct extends Component {
         this.props.deleteAD(id);
     }
     render() {
+        console.log(this.props.idCurrentUser)
         var { ads } = this.props.ad;
-        var listAds = ads.map((ad, index) => {
+        var userADs = ads.filter(ad => ad.idUser === this.props.idCurrentUser)
+        var listAds = userADs.map((ad, index) => {
             return <div key={index}>
                 <div className="col-xs-4 col-sm-4 col-md-4 col-lg-4">
                     <div className="thumbnail">
@@ -54,7 +56,7 @@ class ManageProduct extends Component {
                             data-toggle="modal" data-target="#addAdvertisement"
                         ><span className="glyphicon glyphicon-plus"></span> New Advertisement</a>
                     </div>
-                    <AddAdvertisement addNewAd={(data) => this.addNewAd(data)} />
+                    <AddAdvertisement idCurrentUser={this.props.idCurrentUser} addNewAd={(data) => this.addNewAd(data)} />
                 </div>
                 <div className="row" style={{ paddingBottom: 10 }}>
                     <div className="col-xs-6 col-sm-6 col-md-6 col-lg-6">

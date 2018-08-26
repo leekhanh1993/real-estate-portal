@@ -5,6 +5,7 @@ const cors = require('cors')
 
 const advertisements = require('./routes/api/Advertisements')
 const projects = require('./routes/api/Projects')
+const users = require('./routes/api/Users')
 const app = express();
 
 //use cors
@@ -24,6 +25,7 @@ mongoose.connect(db, { useNewUrlParser: true })
 //Use Routes
 app.use('/api/advertisements', advertisements)
 app.use('/api/projects', projects)
+app.use('/api/users', users)
 
 
 const port = process.env.PORT || 5000;

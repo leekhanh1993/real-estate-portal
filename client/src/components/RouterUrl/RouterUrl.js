@@ -8,12 +8,13 @@ import EditProject from '../Project/EditProject';
 
 class RouterUrl extends Component {
     render() {
+        var {idCurrentUser} = this.props;
         return (
             <div>
                 <Switch>
                     <Route exact path="/" component={Product} />
                     <Route path="/product" component={Product} />
-                    <Route path="/manageproduct" component={ManageProduct} />
+                    <Route path="/manageproduct" component={()=> <ManageProduct idCurrentUser={idCurrentUser}/>}/>
                     <Route path="/manageproject" component={ManageProject} />
                     <Route path="/edit/:_id" component={EditProduct} />
                     <Route path="/edit-project/:_id" component={EditProject} />

@@ -1,26 +1,18 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux'
-import { addUser } from './../../actions/userActions'
+import {connect} from 'react-redux'
+import {getUsers} from './../../actions/userActions'
 
-class AddUser extends Component {
+class UserLogin extends Component {
     constructor(props) {
         super(props);
         this.state = {
             userName: '',
-            displayName: '',
-            password: '',
-            confirmPassword: ''
+            password: ''
         }
     }
-    componentWillMount() {
-        this.setState({
-            userName: '',
-            displayName: '',
-            password: '',
-            confirmPassword: ''
-        })
+    componentDidMount(){
+        this.props.getUsers();
     }
-
     onChange(e) {
         var target = e.target;
         var name = target.name;
@@ -32,33 +24,42 @@ class AddUser extends Component {
     clearForm() {
         this.setState({
             userName: '',
-            displayName: '',
-            password: '',
-            confirmPassword: ''
+            password: ''
         })
     }
-    createUser() {
-        var { userName, displayName, password, confirmPassword } = this.state;
-        if (userName && displayName && password && confirmPassword) {
-            console.log("Bug")
-            var newUser = {
-                userName,
-                displayName,
-                password
+
+    submitUserLogin() {
+        var {userName, password} = this.state;
+        var {users} = this.props.users;
+        var reqLogin = false;
+        var currentUser;
+        for (let index = 0; index < users.length; index++) {
+            const element = users[index];
+            if(element.userName === userName && element.password === password){
+                reqLogin = true;
+                currentUser= element
+
             }
-            this.props.addUser(newUser)
-            alert('Add User Successful!!')
+        }
+        if (reqLogin) {
+            alert("Login Successful!!!")
+            this.props.setMainLogin(currentUser.displayName, currentUser._id, true)
             this.clearForm();
         }
+        else{
+            alert('Wrong User Name or Password')
+            this.clearForm();
+        }
+
     }
-    closeRegUser() {
+    closeUserLogin() {
         this.clearForm();
     }
     render() {
         return (
             <div>
                 {/* Modal */}
-                <div id="addUser" className="modal fade" role="dialog">
+                <div id="userLogin" className="modal fade" role="dialog">
                     <div className="modal-dialog">
                         {/* Modal content*/}
                         <div className="modal-content">
@@ -66,7 +67,7 @@ class AddUser extends Component {
                                 <h4 className="modal-title text-center">Create User</h4>
                             </div>
                             <div className="modal-body">
-                                <form onSubmit={this.createUser.bind(this)} id="registerUserForm" className="form-horizontal">
+                                <form id="userLoginForm" className="form-horizontal">
                                     <div className="form-group">
                                         <label className="col-sm-5 control-label">User Name</label>
                                         <div className="col-sm-5">
@@ -76,19 +77,6 @@ class AddUser extends Component {
                                                 placeholder="User Name"
                                                 name="userName"
                                                 value={this.state.userName}
-                                                onChange={this.onChange.bind(this)}
-                                            />
-                                        </div>
-                                    </div>
-                                    <div className="form-group">
-                                        <label className="col-sm-5 control-label">Display Name</label>
-                                        <div className="col-sm-5">
-                                            <input
-                                                type="text"
-                                                className="form-control"
-                                                placeholder="Display Name"
-                                                name="displayName"
-                                                value={this.state.displayName}
                                                 onChange={this.onChange.bind(this)}
                                             />
                                         </div>
@@ -107,31 +95,21 @@ class AddUser extends Component {
                                         </div>
                                     </div>
                                     <div className="form-group">
-                                        <label className="col-sm-5 control-label">Confirm Password</label>
-                                        <div className="col-sm-5">
-                                            <input
-                                                type="password"
-                                                className="form-control"
-                                                placeholder="Confirm Password"
-                                                name="confirmPassword"
-                                                value={this.state.confirmPassword}
-                                                onChange={this.onChange.bind(this)}
-                                            />
-                                        </div>
-                                    </div>
-                                    <div className="form-group">
                                         <div className="col-sm-5 col-sm-offset-5">
                                             <button
-                                                type="submit"
+                                                type="button"
+                                                // data-dismiss="modal"
+                                                id='closeUserLoginBtnL'
                                                 className="btn btn-success"
+                                                onClick={this.submitUserLogin.bind(this)}
                                                 style={{ marginRight: 10 }}
-                                            >Create</button>
+                                            >Login</button>
                                             <button
                                                 type="button"
-                                                onClick={this.closeRegUser.bind(this)}
+                                                onClick={this.closeUserLogin.bind(this)}
                                                 className="btn btn-danger"
-                                                data-dismiss="modal"
-                                            // id='closeRegisterUser'
+                                                // data-dismiss="modal"
+                                                id='closeUserLoginbtnC'
                                             >Close</button>
                                         </div>
                                     </div>
@@ -145,10 +123,11 @@ class AddUser extends Component {
         );
     }
 }
-const mapStateToProps = state => {
-    return {
 
+const mapStateToProps = state =>{
+    return {
+        users: state.users
     }
 }
 
-export default connect(mapStateToProps, { addUser })(AddUser);
+export default connect(mapStateToProps, {getUsers})(UserLogin);

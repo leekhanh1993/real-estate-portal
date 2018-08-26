@@ -7,17 +7,34 @@ import { BrowserRouter as Router } from "react-router-dom";
 import RouterUrl from '../RouterUrl/RouterUrl';
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isLogIn: false,
+      idCurrentUser: ''
+    }
+  }
+
+  setMainLogin(idCurrentUser, isLogIn){
+    this.setState({
+      idCurrentUser,
+      isLogIn
+    })
+  }
   render() {
+    console.log(this.state.idCurrentUser)
     return (
       <Router>
         <div>
           {/* Header */}
           <Header />
           {/* Navigation */}
-          <Navigation />
+          <Navigation
+            setMainLogin={(idCurrentUser, isLogIn) => this.setMainLogin(idCurrentUser, isLogIn)}
+            isLogIn={this.state.isLogIn} />
           {/* Content */}
           <div className="content">
-            <RouterUrl/>
+            <RouterUrl idCurrentUser={this.state.idCurrentUser}/>
           </div>
           {/* Footer */}
           <Footer />

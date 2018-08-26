@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import {connect} from 'react-redux'
+import {getPROs} from './../../actions/proActions'
 
 class AddAdvertisement extends Component {
     constructor(props) {
@@ -18,6 +20,14 @@ class AddAdvertisement extends Component {
             idUser: '',
             idProject: ''
         }
+    }
+    componentDidMount(){
+        this.props.getPROs();
+    }
+    componentWillMount() {
+        this.setState({
+            idUser: this.props.idCurrentUser
+        })
     }
     onChange(e) {
         var target = e.target;
@@ -40,16 +50,19 @@ class AddAdvertisement extends Component {
             address: '',
             postDate: '',
             expiredDate: '',
-            idUser: '',
             idProject: ''
         })
     }
 
-    addAdvertisement(){
+    addAdvertisement() {
         this.props.addNewAd(this.state)
         this.clearForm();
     }
     render() {
+        var {pros} = this.props.projects;
+        var listProjects = pros.map((project, index)=>{
+            return <option key={index} value={project._id}>{project.name}</option>
+        })
         return (
             <div>
                 {/* Modal */}
@@ -107,7 +120,6 @@ class AddAdvertisement extends Component {
                                             </div>
                                         </div>
                                     </div>
-
                                     <div className="row">
                                         <div className="col-xs-6 col-sm-6 col-md-6 col-lg-6">
                                             <label>Area</label>
@@ -216,38 +228,29 @@ class AddAdvertisement extends Component {
                                     </div>
                                     <div className="row">
                                         <div className="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                                            <label>ID User</label>
-                                            <input
-                                                type="text"
-                                                className="form-control"
-                                                placeholder="ID User"
-                                                name="idUser"
-                                                value={this.state.idUser}
-                                                onChange={this.onChange.bind(this)}
-                                            />
-                                        </div>
-                                        <div className="col-xs-6 col-sm-6 col-md-6 col-lg-6">
                                             <div className="form-group">
-                                                <label>ID Project</label>
-                                                <input
-                                                    type="text"
+                                                <label>Project</label>
+                                                <select
+                                                    id="inputtypePro"
                                                     className="form-control"
-                                                    placeholder="ID Project"
+                                                    required="required"
                                                     name="idProject"
                                                     value={this.state.idProject}
                                                     onChange={this.onChange.bind(this)}
-                                                />
+                                                >
+                                                    {listProjects}
+                                                </select>
                                             </div>
                                         </div>
                                     </div>
                                 </form>
                             </div>
                             <div className="modal-body text-center">
-                                <a 
-                                className="btn btn-success" 
-                                style={{ marginRight: 10 }}
-                                onClick={this.addAdvertisement.bind(this)}
-                                data-dismiss="modal"
+                                <a
+                                    className="btn btn-success"
+                                    style={{ marginRight: 10 }}
+                                    onClick={this.addAdvertisement.bind(this)}
+                                    data-dismiss="modal"
                                 >Add</a>
                                 <a className="btn btn-danger" data-dismiss="modal">Close</a>
                             </div>
@@ -259,4 +262,9 @@ class AddAdvertisement extends Component {
     }
 }
 
-export default AddAdvertisement;
+const mapStateToProps = state =>{
+    return {
+        projects: state.pros
+    }
+}
+export default connect(mapStateToProps, {getPROs})(AddAdvertisement);

@@ -1,35 +1,42 @@
 import React, { Component } from 'react';
 import { NavLink } from "react-router-dom";
 import AddUser from '../Modal/AddUser';
+import UserLogin from '../Modal/UserLogin';
 
 class Navigation extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            isLogIn: false
+            displayName: ''
         }
     }
-    setLogin() {
+
+    setMainLogin(displayName, id, isLogIn) {
+        this.props.setMainLogin(id, isLogIn);
         this.setState({
-            isLogIn: !this.state.isLogIn
+            displayName
         })
+    }
+    setLogOut() {
+        window.location.reload();
     }
     render() {
         var controlUser;
-        if (this.state.isLogIn) {
-            controlUser = [<ul className="nav navbar-nav navbar-right">
+        if (this.props.isLogIn) {
+            controlUser = [<ul key="1" className="nav navbar-nav navbar-right">
                 <li className="dropdown">
                     <a
                         style={{ cursor: 'pointer' }}
                         className="dropdown-toggle"
                         data-toggle="dropdown">
-                        <span className="glyphicon glyphicon-user" /> Vo Tan Nhut Khanh</a>
+                        <span className="glyphicon glyphicon-user" /> {this.state.displayName}</a>
                     <ul className="dropdown-menu">
                         <li><NavLink to="/manageproduct" style={{ cursor: 'pointer' }}>Your Advertisements</NavLink></li>
-                        <li><a
-                            onClick={this.setLogin.bind(this)}
+                        <li><NavLink
+                            onClick={this.setLogOut.bind(this)}
+                            to="/product"
                             style={{ cursor: 'pointer' }}
-                        ><span className="glyphicon glyphicon-log-out" /> Log out</a>
+                        ><span className="glyphicon glyphicon-log-out" /> Log out</NavLink>
                         </li>
                     </ul>
                 </li>
@@ -37,22 +44,26 @@ class Navigation extends Component {
             </ul>]
         } else {
             controlUser = [<ul key="1" className="nav navbar-nav navbar-right">
+                <UserLogin setMainLogin={(displayName, id, isLogIn) => this.setMainLogin(displayName, id, isLogIn)} />
                 <li>
                     <a
-                        onClick={this.setLogin.bind(this)}
+                        data-toggle="modal"
+                        data-target='#userLogin'
+                        id="openUserLogin"
                         style={{ cursor: 'pointer' }}
                     ><span className="glyphicon glyphicon-log-in" /> Login</a>
                 </li>
             </ul>,
             <ul key="2" className="nav navbar-nav navbar-right">
-            <AddUser/>
+                <AddUser />
                 <li>
-                    <a 
-                    data-toggle="modal" 
-                    data-target="#addUser" 
-                    style={{ cursor: 'pointer' }}
+                    <a
+                        id="openRegisterUser"
+                        data-toggle="modal"
+                        data-target="#addUser"
+                        style={{ cursor: 'pointer' }}
                     ><span className="glyphicon glyphicon-plus" /> Register</a>
-                    </li>
+                </li>
             </ul>]
         }
         return (
@@ -77,15 +88,6 @@ class Navigation extends Component {
                                 >Manage Project</NavLink></li>
                             </ul>
                             {controlUser}
-                            {/* <ul className="nav navbar-nav navbar-right">
-                                <li><NavLink to="/manageproduct" style={{ cursor: 'pointer' }}><span className="glyphicon glyphicon-user" /> User Control</NavLink></li>
-                            </ul>
-                            <ul className="nav navbar-nav navbar-right">
-                                <li><NavLink to="/manageproduct" style={{ cursor: 'pointer' }}><span className="glyphicon glyphicon-log-in" /> Login</NavLink></li>
-                            </ul>
-                            <ul className="nav navbar-nav navbar-right">
-                                <li><NavLink to="/manageproduct" style={{ cursor: 'pointer' }}><span className="glyphicon glyphicon-plus" /> Register</NavLink></li>
-                            </ul> */}
                         </div>
                     </div>
                 </nav>
