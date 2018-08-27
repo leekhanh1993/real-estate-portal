@@ -40,7 +40,6 @@ class AddUser extends Component {
     createUser() {
         var { userName, displayName, password, confirmPassword } = this.state;
         if (userName && displayName && password && confirmPassword) {
-            console.log("Bug")
             var newUser = {
                 userName,
                 displayName,
