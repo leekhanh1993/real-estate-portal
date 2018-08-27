@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import {connect} from 'react-redux'
-import {getPROs} from './../../actions/proActions'
+import { connect } from 'react-redux'
+import { getPROs } from './../../actions/proActions'
 
 class AddAdvertisement extends Component {
     constructor(props) {
@@ -21,7 +21,7 @@ class AddAdvertisement extends Component {
             idProject: ''
         }
     }
-    componentDidMount(){
+    componentDidMount() {
         this.props.getPROs();
     }
     componentWillMount() {
@@ -59,8 +59,8 @@ class AddAdvertisement extends Component {
         this.clearForm();
     }
     render() {
-        var {pros} = this.props.projects;
-        var listProjects = pros.map((project, index)=>{
+        var { pros } = this.props.projects;
+        var listProjects = pros.map((project, index) => {
             return <option key={index} value={project._id}>{project.name}</option>
         })
         return (
@@ -238,6 +238,7 @@ class AddAdvertisement extends Component {
                                                     value={this.state.idProject}
                                                     onChange={this.onChange.bind(this)}
                                                 >
+                                                    <option value="" disabled className="text-hide">Please select</option>
                                                     {listProjects}
                                                 </select>
                                             </div>
@@ -262,9 +263,9 @@ class AddAdvertisement extends Component {
     }
 }
 
-const mapStateToProps = state =>{
+const mapStateToProps = state => {
     return {
         projects: state.pros
     }
 }
-export default connect(mapStateToProps, {getPROs})(AddAdvertisement);
+export default connect(mapStateToProps, { getPROs })(AddAdvertisement);

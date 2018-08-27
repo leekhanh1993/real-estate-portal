@@ -90,6 +90,7 @@ class AddProject extends Component {
                                                     value={this.state.typePro}
                                                     onChange={this.onChange.bind(this)}
                                                 >
+                                                    <option value="" disabled className="text-hide">Please select</option>
                                                     <option value="House">House</option>
                                                     <option value="Apartment">Apartment</option>
                                                     <option value="Land">Land</option>
