@@ -7,7 +7,7 @@ class Product extends Component {
                 <div className="col-xs-2 col-sm-2 col-md-2 col-lg-2 filterstyle">
                     <div className="panel panel-default">
                         <div className="panel-heading ">
-                            <h3 className="panel-title">Filter By</h3>
+                            <h3 className="panel-title" style={{color: 'white'}}>Filter By</h3>
                         </div>
                         <div className="panel-body">
                             <div className="panel-group">

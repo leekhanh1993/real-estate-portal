@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { getADs, getAD, editAD } from './../../actions/adActions'
+import { getPROs } from './../../actions/proActions'
 import { Redirect } from 'react-router-dom'
 
 class EditProduct extends Component {
@@ -43,6 +44,10 @@ class EditProduct extends Component {
     }
     componentWillMount() {
         this.props.getAD(this.props.match.params._id)
+
+    }
+    componentDidMount() {
+        this.props.getPROs()
     }
     onChange(e) {
         var target = e.target;
@@ -74,15 +79,20 @@ class EditProduct extends Component {
             isRedirect: !this.state.isRedirect
         })
     }
-    onCancel(){
+    onCancel() {
         this.setState({
             isRedirect: !this.state.isRedirect
         })
     }
     render() {
+        var { pros } = this.props.projects;
         if (this.state.isRedirect) {
             return <Redirect to="/manageproduct" />
         }
+
+        var listProject = pros.map((project, index) => {
+            return <option key={index} value={project._id}>{project.name}</option>
+        })
         return (
             <div className="container">
                 <div className="panel panel-default">
@@ -255,29 +265,19 @@ class EditProduct extends Component {
                             </div>
                             <div className="row">
                                 <div className="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                                    <label>ID User</label>
-                                    <input
-                                        type="text"
-                                        className="form-control"
-                                        placeholder="ID User"
-                                        name="idUser"
-                                        value={this.state.idUser}
-                                        onChange={this.onChange.bind(this)}
-                                        required
-                                    />
-                                </div>
-                                <div className="col-xs-6 col-sm-6 col-md-6 col-lg-6">
                                     <div className="form-group">
-                                        <label>ID Project</label>
-                                        <input
-                                            type="text"
+                                        <label>Project</label>
+                                        <select
+                                            id="inputtypePro"
                                             className="form-control"
-                                            placeholder="ID Project"
+                                            required="required"
                                             name="idProject"
                                             value={this.state.idProject}
                                             onChange={this.onChange.bind(this)}
                                             required
-                                        />
+                                        >
+                                            {listProject}
+                                        </select>
                                     </div>
                                 </div>
                             </div>
@@ -307,7 +307,8 @@ class EditProduct extends Component {
 }
 const mapStateToProps = state => {
     return {
-        ad: state.ad
+        ad: state.ad,
+        projects: state.pros
     }
 }
-export default connect(mapStateToProps, { getADs, getAD,editAD })(EditProduct);
+export default connect(mapStateToProps, { getADs, getAD, editAD, getPROs })(EditProduct);

@@ -14,15 +14,14 @@ class RouterUrl extends Component {
         return (
             <div>
                 <Switch>
-                    <Route exact path="/" component={Product} />
+                    <Route exact path="/" component={HomePage} />
                     <Route path="/product" component={Product} />
                     <Route path="/manageproduct" component={()=> <ManageProduct idCurrentUser={idCurrentUser}/>}/>
                     <Route path="/manageproject" component={ManageProject} />
                     <Route path="/edit/:_id" component={EditProduct} />
                     <Route path="/edit-project/:_id" component={EditProject} />
                     <Route path="/home" component={HomePage}/>
-                    <Route component={Product} />
-                    
+                    <Route component={HomePage}/>   
                 </Switch>
             </div>
         );
