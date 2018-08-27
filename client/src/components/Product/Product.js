@@ -1,13 +1,59 @@
 import React, { Component } from 'react';
+import { getADs } from './../../actions/adActions'
+import { connect } from 'react-redux'
 
 class Product extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            filterArea: '',
+            filterNumBedRoom: ''
+        }
+    }
+
+    componentDidMount() {
+        this.props.getADs();
+    }
+    onSearchByArea(filterArea) {
+        this.setState({
+            filterArea
+        })
+    }
+    onSearchByNumBedRoom(filterNumBedRoom) {
+        this.setState({
+            filterNumBedRoom
+        })
+    }
     render() {
+        var { ads } = this.props.ads;
+        //list Areas
+        var listAreas = ads.map((ad, index) => {
+            return <li key={index} className="list-group-item">
+                <a
+                    onClick={this.onSearchByArea.bind(this, ad.area)}
+                >{ad.area}</a>
+            </li>
+        })
+        //list Bedrooms
+        var availableNum = []
+        var listNumBedRooms = ads.filter((ad, index) => {
+            if (!availableNum.includes(ad.numbedrooms)) {
+                return <li key={index} className="list-group-item">
+                    <a
+                        onClick={this.onSearchByNumBedRoom.bind(this, ad.numbedrooms)}
+                    >{ad.numbedrooms}</a>
+                </li>
+            } else {
+                availableNum.concat(ad.numbedrooms)
+            }
+
+        })
         return (
-            <div className="container-fluid" style={{paddingTop:"5%"}}>
+            <div className="container-fluid" style={{ paddingTop: "5%" }}>
                 <div className="col-xs-2 col-sm-2 col-md-2 col-lg-2 filterstyle">
                     <div className="panel panel-default">
                         <div className="panel-heading ">
-                            <h3 className="panel-title" style={{color: 'white'}}>Filter By</h3>
+                            <h3 className="panel-title" style={{ color: 'white' }}>Filter By</h3>
                         </div>
                         <div className="panel-body">
                             <div className="panel-group">
@@ -19,9 +65,7 @@ class Product extends Component {
                                     </div>
                                     <div id="area" className="panel-collapse collapse">
                                         <ul className="list-group">
-                                            <li className="list-group-item"> <a>One</a></li>
-                                            <li className="list-group-item"><a>One</a></li>
-                                            <li className="list-group-item"><a>One</a></li>
+                                            {listAreas}
                                         </ul>
                                     </div>
                                 </div>
@@ -38,6 +82,7 @@ class Product extends Component {
                                             <li className="list-group-item"><a>One</a></li>
                                             <li className="list-group-item"><a>One</a></li>
                                             <li className="list-group-item"><a>One</a></li>
+                                            
                                         </ul>
                                     </div>
                                 </div>
@@ -94,7 +139,7 @@ class Product extends Component {
                     </div>
                 </div>
                 <div className="col-xs-10 col-sm-10 col-md-10 col-lg-10">
-                    <div className="row" style={{paddingBottom: 10}}>
+                    <div className="row" style={{ paddingBottom: 10 }}>
                         <div className="col-xs-6 col-sm-6 col-md-6 col-lg-6">
                             <div className="input-group">
                                 <input type="text" className="form-control" placeholder="Search" />
@@ -175,4 +220,10 @@ class Product extends Component {
     }
 }
 
-export default Product;
+const mapStateToProps = state => {
+    return {
+        ads: state.ads
+    }
+}
+
+export default connect(mapStateToProps, { getADs })(Product);
