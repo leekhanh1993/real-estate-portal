@@ -274,7 +274,6 @@ class EditProduct extends Component {
                                             name="idProject"
                                             value={this.state.idProject}
                                             onChange={this.onChange.bind(this)}
-                                            required
                                         >
                                             {listProject}
                                         </select>

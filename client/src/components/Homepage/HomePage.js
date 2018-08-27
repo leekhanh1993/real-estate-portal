@@ -1,8 +1,4 @@
 import React, { Component } from 'react';
-import Header from '../Header/Header';
-import Navigation from '../Navigation/Navigation';
-import AddUser from '../Modal/AddUser';
-import UserLogin from '../Modal/UserLogin';
 
 
 class HomePage extends Component {
@@ -26,9 +22,6 @@ setLogOut() {
       
         return (
             <div>
-         
-         
-            
         <div className="row">
           {/* Carousel */}
           <div id="carousel-example-generic" className="carousel slide" data-ride="carousel">
@@ -51,11 +44,11 @@ setLogOut() {
                       <span>Hello SAIGON</span>
                     </h2>
                     <br />
-                    <div className>
-                      <a className="btn btn-theme btn-sm btn-min-block" href="#">Login</a><a className="btn btn-theme btn-sm btn-min-block" href="#">Register</a></div> <br/>
-                      <div className>
-                      <a className="btn btn-theme " href="#" style={{fontSize:"15pt"}}>Total Properties <br/> 250000+ </a>
-                      <a className="btn btn-theme " href="#"style={{fontSize:"15pt"}}>Total Users <br/>2000+ </a></div>
+                    <div>
+                      <a className="btn btn-theme btn-sm btn-min-block" >Login</a><a className="btn btn-theme btn-sm btn-min-block" >Register</a></div> <br/>
+                      <div>
+                      <a className="btn btn-theme "  style={{fontSize:"15pt"}}>Total Properties <br/> 250000+ </a>
+                      <a className="btn btn-theme " style={{fontSize:"15pt"}}>Total Users <br/>2000+ </a></div>
                       
                   </div>
                 </div>{/* /header-text */}
@@ -71,12 +64,12 @@ setLogOut() {
                     <br />
                     
                     <br />
-                    <div className>
+                    <div>
                       <a className="btn btn-theme btn-sm btn-min-block" >Login</a>
-                      <a className="btn btn-theme btn-sm btn-min-block" href="#">Register</a></div><br/>
-                      <div className>
-                      <a className="btn btn-theme btn-sm btn-min-block" href="#" style={{fontSize:"15pt"}}>Total Properties <br/> 250000+ </a>
-                      <a className="btn btn-theme btn-sm btn-min-block" href="#"style={{fontSize:"15pt"}}>Total Users <br/>2000+ </a></div>
+                      <a className="btn btn-theme btn-sm btn-min-block" >Register</a></div><br/>
+                      <div>
+                      <a className="btn btn-theme btn-sm btn-min-block"  style={{fontSize:"15pt"}}>Total Properties <br/> 250000+ </a>
+                      <a className="btn btn-theme btn-sm btn-min-block" style={{fontSize:"15pt"}}>Total Users <br/>2000+ </a></div>
                   </div>
                 </div>{/* /header-text */}
               </div>
@@ -91,11 +84,11 @@ setLogOut() {
                     <br />
                     
                     <br />
-                    <div className>
-                      <a className="btn btn-theme btn-sm btn-min-block" href="#">Login</a><a className="btn btn-theme btn-sm btn-min-block" href="#">Register</a></div> <br/>
-                      <div className>
-                      <a className="btn btn-theme btn-sm btn-min-block" href="#" style={{fontSize:"15pt"}}>Total Properties <br/> 250000+ </a>
-                      <a className="btn btn-theme btn-sm btn-min-block" href="#" style={{fontSize:"15pt"}}>Total Users <br/>2000+</a></div>
+                    <div>
+                      <a className="btn btn-theme btn-sm btn-min-block" >Login</a><a className="btn btn-theme btn-sm btn-min-block" >Register</a></div> <br/>
+                      <div>
+                      <a className="btn btn-theme btn-sm btn-min-block"  style={{fontSize:"15pt"}}>Total Properties <br/> 250000+ </a>
+                      <a className="btn btn-theme btn-sm btn-min-block"  style={{fontSize:"15pt"}}>Total Users <br/>2000+</a></div>
                   </div>
                 </div>{/* /header-text */}
               </div>
@@ -152,28 +145,28 @@ setLogOut() {
             <div className="process-step">
               <div className="process-icon">
                 <span>1</span>
-                <img src="http://web24service.com/demo/w-shipping/assets/images/process-icon1.png" alt />
+                <img src="http://web24service.com/demo/w-shipping/assets/images/process-icon1.png" alt="process1" />
               </div>
               <p>Search</p>
             </div>
             <div className="process-step">
               <div className="process-icon">
                 <span>2</span>
-                <img src="http://web24service.com/demo/w-shipping/assets/images/process-icon2.png" alt />
+                <img src="http://web24service.com/demo/w-shipping/assets/images/process-icon2.png" alt="process2" />
               </div>
               <p>Visit</p>
             </div>
             <div className="process-step">
               <div className="process-icon">
                 <span>3</span>
-                <img src="http://web24service.com/demo/w-shipping/assets/images/process-icon3.png" alt />
+                <img src="http://web24service.com/demo/w-shipping/assets/images/process-icon3.png" alt="process3" />
               </div>
               <p>Contract</p>
             </div>
             <div className="process-step">
               <div className="process-icon">
                 <span>4</span>
-                <img src="http://web24service.com/demo/w-shipping/assets/images/process-icon4.png" alt />
+                <img src="http://web24service.com/demo/w-shipping/assets/images/process-icon4.png" alt="process4" />
               </div>
               <p>Move-In</p>
             </div>
@@ -192,7 +185,7 @@ setLogOut() {
           <div className="col-sm-4">
             <div className="team-members">
               <div className="team-avatar">
-                <img className="img-responsive" src="https://scontent.fsgn2-1.fna.fbcdn.net/v/t1.0-9/25507873_1500281096735400_7519644733628253288_n.jpg?_nc_cat=0&oh=d18d2222c7f6ff0d4c243ef04a34768b&oe=5BEEF94B" alt />
+                <img className="img-responsive" src="https://scontent.fsgn2-1.fna.fbcdn.net/v/t1.0-9/25507873_1500281096735400_7519644733628253288_n.jpg?_nc_cat=0&oh=d18d2222c7f6ff0d4c243ef04a34768b&oe=5BEEF94B" alt="khanh" />
               </div>
               <div className="team-desc">
                 <h4>Khanh Tran</h4>
@@ -205,7 +198,7 @@ setLogOut() {
           <div className="col-sm-4">
             <div className="team-members">
               <div className="team-avatar">
-                <img className="img-responsive" src="https://scontent.fsgn2-1.fna.fbcdn.net/v/t31.0-8/20424269_732881266895366_6489319979452401213_o.jpg?_nc_cat=0&oh=306f7413e002d38be39e0575a1b4ac1c&oe=5C2FCBB7" alt />
+                <img className="img-responsive" src="https://scontent.fsgn2-1.fna.fbcdn.net/v/t31.0-8/20424269_732881266895366_6489319979452401213_o.jpg?_nc_cat=0&oh=306f7413e002d38be39e0575a1b4ac1c&oe=5C2FCBB7" alt="Minh" />
               </div>
               <div className="team-desc">
                 <h4>Minh Huynh</h4>
@@ -218,7 +211,7 @@ setLogOut() {
           <div className="col-sm-4">
             <div className="team-members">
               <div className="team-avatar">
-                <img className="img-responsive" src="https://scontent.fsgn2-1.fna.fbcdn.net/v/t1.0-9/34869328_1849607595062700_4515752477852696576_n.jpg?_nc_cat=0&oh=ee3f697141153c0670fd4dd4d24f0656&oe=5BFE6860" alt />
+                <img className="img-responsive" src="https://scontent.fsgn2-1.fna.fbcdn.net/v/t1.0-9/34869328_1849607595062700_4515752477852696576_n.jpg?_nc_cat=0&oh=ee3f697141153c0670fd4dd4d24f0656&oe=5BFE6860" alt="Tu" />
               </div>
               <div className="team-desc">
                 <h4>Tu Bui</h4>
