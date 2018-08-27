@@ -26,8 +26,8 @@ class App extends Component {
     return (
       <Router>
         <div>
-          {/* Header */}
-          <Header />
+          
+          
           {/* Navigation */}
           <Navigation
             setMainLogin={(idCurrentUser, isLogIn) => this.setMainLogin(idCurrentUser, isLogIn)}

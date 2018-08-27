@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 class Product extends Component {
     render() {
         return (
-            <div className="container-fluid">
+            <div className="container-fluid" style={{paddingTop:"5%"}}>
                 <div className="col-xs-2 col-sm-2 col-md-2 col-lg-2 filterstyle">
                     <div className="panel panel-default">
                         <div className="panel-heading ">

@@ -5,6 +5,8 @@ import ManageProject from '../Project/ManageProject';
 import ManageProduct from '../Product/ManageProduct';
 import EditProduct from '../Product/EditProduct';
 import EditProject from '../Project/EditProject';
+import HomePage from '../Homepage/HomePage';
+
 
 class RouterUrl extends Component {
     render() {
@@ -18,7 +20,9 @@ class RouterUrl extends Component {
                     <Route path="/manageproject" component={ManageProject} />
                     <Route path="/edit/:_id" component={EditProduct} />
                     <Route path="/edit-project/:_id" component={EditProject} />
+                    <Route path="/home" component={HomePage}/>
                     <Route component={Product} />
+                    
                 </Switch>
             </div>
         );

@@ -23,8 +23,8 @@ class Navigation extends Component {
     render() {
         var controlUser;
         if (this.props.isLogIn) {
-            controlUser = [<ul key="1" className="nav navbar-nav navbar-right">
-                <li className="dropdown">
+            controlUser = [
+                <li key="1" className="dropdown pull-right">
                     <a
                         style={{ cursor: 'pointer' }}
                         className="dropdown-toggle"
@@ -40,12 +40,12 @@ class Navigation extends Component {
                         </li>
                     </ul>
                 </li>
-
-            </ul>]
+                ]
         } else {
-            controlUser = [<ul key="1" className="nav navbar-nav navbar-right">
-                <UserLogin setMainLogin={(displayName, id, isLogIn) => this.setMainLogin(displayName, id, isLogIn)} />
-                <li>
+            controlUser = [
+                
+                <li key="1" className='pull-right'>
+                    <UserLogin setMainLogin={(displayName, id, isLogIn) => this.setMainLogin(displayName, id, isLogIn)} />
                     <a
                         data-toggle="modal"
                         data-target='#userLogin'
@@ -53,10 +53,10 @@ class Navigation extends Component {
                         style={{ cursor: 'pointer' }}
                     ><span className="glyphicon glyphicon-log-in" /> Login</a>
                 </li>
-            </ul>,
-            <ul key="2" className="nav navbar-nav navbar-right">
-                <AddUser />
-                <li>
+           ,
+                
+                <li key="2" className="pull-right">
+                    <AddUser />
                     <a
                         id="openRegisterUser"
                         data-toggle="modal"
@@ -64,34 +64,28 @@ class Navigation extends Component {
                         style={{ cursor: 'pointer' }}
                     ><span className="glyphicon glyphicon-plus" /> Register</a>
                 </li>
-            </ul>]
+            ]
         }
         return (
-            <div>
-                <nav className="navbar navbar-inverse">
-                    <div className="container-fluid">
-                        <div className="navbar-header">
-                            <button type="button" className="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-                                <span className="icon-bar" />
-                                <span className="icon-bar" />
-                                <span className="icon-bar" />
-                            </button>
-                            <NavLink to="/" className="navbar-brand">LK Company</NavLink>
-                        </div>
-                        <div className="collapse navbar-collapse" id="myNavbar">
-                            <ul className="nav navbar-nav">
-                                <li ><NavLink
-                                    to='/product'
-                                >Product</NavLink></li>
-                                <li><NavLink
-                                    to='/manageproject'
-                                >Manage Project</NavLink></li>
-                            </ul>
-                            {controlUser}
-                        </div>
+            <header id="header">
+                <div className="container">
+                    <div id="logo" className="pull-left">
+                        <h1><a href="#intro" className="scrollto" >MK Estates</a></h1>
+                        {/* Uncomment below if you prefer to use an image logo */}
+                        {/* <a href="#intro"><img src="img/logo.png" alt="" title="" /></a>*/}
                     </div>
-                </nav>
-            </div>
+                    <nav id="nav-menu-container">
+                        <ul className="nav-menu"  >
+                            <NavLink to="/home"> <li><a href>Home</a> </li> </NavLink>
+                            <NavLink to="/product"> <li><a href>Properties</a> </li> </NavLink>
+                            <NavLink to="/manageproject"> <li><a href>Projects</a> </li> </NavLink>
+                            <NavLink to="/manageproduct"> <li><a>User Control</a> </li> </NavLink>
+                            {controlUser}
+                        </ul>
+                    </nav>{/* #nav-menu-container */}
+
+                </div>
+            </header>/* #header */
         );
     }
 }
