@@ -18,10 +18,19 @@ class Product extends Component {
             collapseNumBedRoom: false,
             collapseNumFloor: false,
             collapseDirection: false,
-            collapsePrice: false
+            collapsePrice: false,
+            currentPage: 1,
+            adsPerPage: 1,
+            hidePage: 1,
         }
     }
 
+    onClick(currentPage) {
+        this.setState({
+            currentPage,
+            hidePage: currentPage
+        })
+    }
     onChange(e) {
         var target = e.target;
         var name = target.name;
@@ -179,7 +188,7 @@ class Product extends Component {
                 key={num}
                 className="list-group-item"
                 onClick={this.onSearchByNumBedRoom.bind(this, num)}
-            ><a>{num}</a></li>
+            ><a>{num === 1 ? (num + " Bed Room") : (num + " Bed Rooms")}</a></li>
         })
 
         //render  NumFloors
@@ -198,8 +207,44 @@ class Product extends Component {
                 key={num}
                 className="list-group-item"
                 onClick={this.onSearchByNumFloor.bind(this, num)}
-            ><a>{num}</a></li>
+            ><a>{num === 1 ? (num + " Floor") : (num + " Floors")}</a></li>
         })
+
+        //load ads via pagination
+        var { adsPerPage, currentPage, hidePage } = this.state;
+        var totalADs = Math.ceil(copyADs.length / adsPerPage)
+        console.log(totalADs)
+
+        //logic for display page numbers
+        var pageNumbers = []
+        for (let i = 1; i <= totalADs; i++) {
+            pageNumbers.push(i);
+
+        }
+        if ('123'.includes(hidePage)) {
+            var pageNumbers = pageNumbers.slice(0, 5)
+            var loadPageNumbers = pageNumbers.map(number => {
+                return <li className={hidePage === number ? 'active' : ''} key={number}>
+                    <a
+                        onClick={this.onClick.bind(this, number)}
+                    >{number}</a>
+                </li>
+            })
+        } else {
+            var pageNumbers = pageNumbers.slice((hidePage - 3), (hidePage + 2))
+            var loadPageNumbers = pageNumbers.map(number => {
+                return <li className={hidePage === number ? 'active' : ''} key={number}>
+                    <a
+                        onClick={this.onClick.bind(this, number)}
+                    >{number}</a>
+                </li>
+            })
+        }
+        //logic for display current ads
+        var indexOfLastADs = currentPage * adsPerPage
+        var indexOfFirstADs = indexOfLastADs - adsPerPage
+        ads = ads.slice(indexOfFirstADs, indexOfLastADs)
+
 
         //Redner all advertisements
         var listAllADs = ads.map((ad, index) => {
@@ -377,6 +422,19 @@ class Product extends Component {
                     </div>
                     <div className="row">
                         {listAllADs}
+                    </div>
+                    <div className="row text-center">
+                        <div className="pagination pagination-lg">
+                            <li className={this.state.currentPage === 1 ? "disabled" : ""}>
+                                <a
+                                    onClick={this.onClick.bind(this, 1)}
+                                >{'<<'}</a></li>
+                            {loadPageNumbers}
+                            <li className={this.state.currentPage === totalADs ? "disabled" : ""}>
+                                <a
+                                    onClick={this.onClick.bind(this, totalADs)}
+                                >{'>>'}</a></li>
+                        </div>
                     </div>
                 </div>
             </div>
