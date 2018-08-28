@@ -35,7 +35,7 @@ class TestForm extends Component {
         var value = target.value;
         var newState = {
             ...this.state,
-            [name]:{
+            [name]: {
                 ...this.state[name],
                 value
             }
@@ -51,78 +51,141 @@ class TestForm extends Component {
             confirmPassword: ''
         })
     }
-    componentDidMount(){
+    componentDidMount() {
         this.props.getUsers();
     }
-    
+
     createUser(e) {
         e.preventDefault();
-        var {userName, displayName, password, confirmPassword} = this.state;
-        var {users} = this.props.users
-        var availablUserName = false;
-   
-        //check User Name
-        const checkUserName = (newUserName)=>{
-            for (let index = 0; index < users.length; index++) {
-                const user = users[index];
-                if(user.userName === newUserName){
-                    availablUserName === true;
-                }
-            }
-            if(validator.isEmpty){
+        //Clear State
+        var newState = {
+            ...this.state,
+            userName: {
+                value: this.state.userName.value,
+                isValid: true,
+                message: ''
+            },
+            displayName: {
+                value: this.state.displayName.value,
+                isValid: true,
+                message: ''
+            },
+            password: {
+                value: this.state.password.value,
+                isValid: true,
+                message: ''
+            },
+            confirmPassword: {
+                value: this.state.confirmPassword.value,
+                isValid: true,
+                message: ''
+            },
+        }
+        this.setState(newState)
+
+        var { userName, displayName, password, confirmPassword } = this.state;
+        var { users } = this.props.users
+
+
+
+        //check user name is avalable or not
+        var availablUserName = [];
+        for (let index = 0; index < users.length; index++) {
+            const user = users[index];
+            availablUserName.push(user.userName)
+        }
+
+        //Validation for User Name
+        const checkUserName = (newUserName) => {
+            var isAvailableUser = availablUserName.includes(newUserName) ? true : false
+            if (newUserName === '') {
                 this.setState({
-                    userName:{
-                        ...userName,
+                    userName: {
+                        value: this.state.userName.value,
                         isValid: false,
-                        message: 'User can not be blanked!!!!'
+                        message: 'User name can not be blanked!!!!'
                     }
                 })
-            }else if(availablUserName){
+            } else if (isAvailableUser) {
                 this.setState({
-                    userName:{
+                    userName: {
+                        value: this.state.userName.value,
                         isValid: false,
-                        message: 'You user name is avalable!!!!'
+                        message: 'Your user name is avalable!!!!'
                     }
-                }) 
-            }else{
-                return -1
+                })
+            } else {
+                return true
             }
         }
-        console.log(availablUserName)
-        checkUserName(userName.value)
+        var resultCheckUserName = checkUserName(userName.value)
 
-        // //check Display Name
-        // const checkDisplayName = (newUserName)=>{
-        //     var availablUserName = false;
-        //     for (let index = 0; index < users.length; index++) {
-        //         const user = users[index];
-        //         if(user.userName === newUserName){
-        //             availablUserName = true;
-        //         }
-        //     }
-        //     if(validator.isEmpty){
-        //         this.setState({
-        //             userName:{
-        //                 isValid: false,
-        //                 message: 'User can not be blanked!!!!'
-        //             }
-        //         })
-        //     }else if(availablUserName){
-        //         this.setState({
-        //             userName:{
-        //                 isValid: false,
-        //                 message: 'You user name is avalable!!!!'
-        //             }
-        //         }) 
-        //     }else{
-        //         return -1
-        //     }
-        // }
-        // checkUserName(userName.value)
+        //Validation for Display Name
+        const checkDisplayName = (newDisplay) => {
+            if (newDisplay === '') {
+                this.setState({
+                    displayName: {
+                        value: this.state.displayName.value,
+                        isValid: false,
+                        message: 'Display name can not be blanked!!!!'
+                    }
+                })
+            } else {
+                return true
+            }
+        }
+        var resultCheckDisplayName = checkDisplayName(displayName.value)
 
-        
+        //Validation for Password
+        const checkPassword = (newPassword) => {
+            if (newPassword === '') {
+                this.setState({
+                    password: {
+                        value: this.state.password.value,
+                        isValid: false,
+                        message: 'Password can not be blanked!!!!'
+                    }
+                })
+            } else {
+                return true
+            }
+        }
+        var resultCheckPassword = checkPassword(password.value)
 
-        
+        //Validation for Password
+        const checkConfirmPassword = (newConfirmPassword) => {
+            if (newConfirmPassword === '') {
+                this.setState({
+                    confirmPassword: {
+                        value: this.state.confirmPassword.value,
+                        isValid: false,
+                        message: 'Confirm password can not be blanked!!!!'
+                    }
+                })
+            } else if (newConfirmPassword !== this.state.password.value) {
+                this.setState({
+                    confirmPassword: {
+                        value: this.state.confirmPassword.value,
+                        isValid: false,
+                        message: 'The password and its confirm are not the same!!!!'
+                    }
+                })
+            } else {
+                return true
+            }
+        }
+        var resultCheckConfirmPassword = checkConfirmPassword(confirmPassword.value)
+
+
+        if (resultCheckUserName && resultCheckDisplayName && resultCheckPassword && resultCheckConfirmPassword) {
+            var newUser = {
+                userName: userName.value,
+                displayName: displayName.value,
+                password: password.value
+            }
+            console.log(newUser)
+        }
+
         // var { userName, displayName, password, confirmPassword } = this.state;
         // if (userName && displayName && password && confirmPassword && (password === confirmPassword)) {
         //     var newUser = {
@@ -141,87 +204,118 @@ class TestForm extends Component {
     render() {
         return (
             <div className="container">
-                <div className="panel panel-primary">
-                    <div className="panel-heading">
-                        <h3 className="panel-title">Test Form</h3>
-                    </div>
-                    <div className="panel-body">
-                        <form onSubmit={this.createUser.bind(this)} className="form-horizontal">
-                            <div className={this.state.userName.isValid ? "form-group" : "form-group has-error"}>
-                                <label className="col-sm-5 control-label">User Name</label>
-                                <div className="col-sm-5">
-                                    <input
-                                        type="text"
-                                        className="form-control"
-                                        placeholder="User Name"
-                                        name="userName"
-                                        value={this.state.userName.value}
-                                        onChange={this.onChange.bind(this)}
-                                    />
+                <div>
+                    {/* Trigger the modal with a button */}
+                    <button type="button" className="btn btn-info btn-lg" data-toggle="modal" data-target="#testForm">Open Modal</button>
+                    {/* Modal */}
+                    <div id="testForm" className="modal fade" role="dialog">
+                        <div className="modal-dialog">
+                            {/* Modal content*/}
+                            <div className="modal-content">
+                                <div className="modal-header">
+                                    <button type="button" className="close" data-dismiss="modal">×</button>
+                                    <h4 className="modal-title">Modal Header</h4>
                                 </div>
-                                {this.state.userName.message !== '' 
-                                ? <div className="help-block"><span className="glyphicon glyphicon-remove"/> {this.state.userName.message}</div> 
-                                : ''
-                                }
-                                
-                            </div>
-                            <div className={this.state.displayName.isValid ? "form-group" : "form-group has-error"}>
-                                <label className="col-sm-5 control-label">Display Name</label>
-                                <div className="col-sm-5">
-                                    <input
-                                        type="text"
-                                        className="form-control"
-                                        placeholder="Display Name"
-                                        name="displayName"
-                                        value={this.state.displayName.value}
-                                        onChange={this.onChange.bind(this)}
-                                    />
+                                <div className="modal-body">
+                                    <div className="panel panel-primary">
+                                        <div className="panel-heading">
+                                            <h3 className="panel-title">Test Form</h3>
+                                        </div>
+                                        <div className="panel-body">
+                                            <form onSubmit={this.createUser.bind(this)} className="form-horizontal">
+                                                <div className={this.state.userName.isValid ? "form-group" : "form-group has-error"}>
+                                                    <label className="control-label col-sm-5">User Name</label>
+                                                    <div className="col-sm-5">
+                                                        <input
+                                                            id="userName"
+                                                            type="text"
+                                                            className="form-control"
+                                                            placeholder="User Name"
+                                                            name="userName"
+                                                            value={this.state.userName.value}
+                                                            onChange={this.onChange.bind(this)}
+                                                        />
+                                                        {this.state.userName.message !== ''
+                                                            ? <small className="text-danger">{this.state.userName.message}</small>
+                                                            : ''
+                                                        }
+                                                    </div>
+                                                </div>
+                                                <div className={this.state.displayName.isValid ? "form-group" : "form-group has-error"}>
+                                                    <label className="col-sm-5 control-label">Display Name</label>
+                                                    <div className="col-sm-5">
+                                                        <input
+                                                            type="text"
+                                                            className="form-control"
+                                                            placeholder="Display Name"
+                                                            name="displayName"
+                                                            value={this.state.displayName.value}
+                                                            onChange={this.onChange.bind(this)}
+                                                        />
+                                                        {this.state.displayName.message !== ''
+                                                            ? <small className="text-danger">{this.state.displayName.message}</small>
+                                                            : ''
+                                                        }
+                                                    </div>
+                                                </div>
+                                                <div className={this.state.password.isValid ? "form-group" : "form-group has-error"}>
+                                                    <label className="col-sm-5 control-label">Password</label>
+                                                    <div className="col-sm-5">
+                                                        <input
+                                                            type="password"
+                                                            className="form-control"
+                                                            placeholder="Password"
+                                                            name="password"
+                                                            value={this.state.password.value}
+                                                            onChange={this.onChange.bind(this)}
+                                                        />
+                                                        {this.state.password.message !== ''
+                                                            ? <small className="text-danger">{this.state.password.message}</small>
+                                                            : ''
+                                                        }
+                                                    </div>
+                                                </div>
+                                                <div className={this.state.confirmPassword.isValid ? "form-group" : "form-group has-error"}>
+                                                    <label className="col-sm-5 control-label">Confirm Password</label>
+                                                    <div className="col-sm-5">
+                                                        <input
+                                                            type="password"
+                                                            className="form-control"
+                                                            placeholder="Confirm Password"
+                                                            name="confirmPassword"
+                                                            value={this.state.confirmPassword.value}
+                                                            onChange={this.onChange.bind(this)}
+                                                        />
+                                                        {this.state.confirmPassword.message !== ''
+                                                            ? <small className="text-danger">{this.state.confirmPassword.message}</small>
+                                                            : ''
+                                                        }
+                                                    </div>
+                                                </div>
+                                                <div className="form-group">
+                                                    <div className="col-sm-5 col-sm-offset-5">
+                                                        <button
+                                                            type="submit"
+                                                            className="btn btn-success"
+                                                            id='btnTestForm'
+                                                            style={{ marginRight: 10 }}
+                                                        >Create</button>
+                                                        <button
+                                                            type="button"
+                                                            data-dismiss="modal"
+                                                            className="btn btn-danger"
+                                                        >Close</button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
                                 </div>
-                                <span className="help-block">{this.state.displayName.message}</span>
-                            </div>
-                            <div className={this.state.password.isValid ? "form-group" : "form-group has-error"}>
-                                <label className="col-sm-5 control-label">Password</label>
-                                <div className="col-sm-5">
-                                    <input
-                                        type="password"
-                                        className="form-control"
-                                        placeholder="Password"
-                                        name="password"
-                                        value={this.state.password.value}
-                                        onChange={this.onChange.bind(this)}
-                                    />
-                                </div>
-                                <span className="help-block">{this.state.password.message}</span>
-                            </div>
-                            <div className={this.state.confirmPassword.isValid ? "form-group" : "form-group has-error"}>
-                                <label className="col-sm-5 control-label">Confirm Password</label>
-                                <div className="col-sm-5">
-                                    <input
-                                        type="password"
-                                        className="form-control"
-                                        placeholder="Confirm Password"
-                                        name="confirmPassword"
-                                        value={this.state.confirmPassword.value}
-                                        onChange={this.onChange.bind(this)}
-                                    />
-                                </div>
-                                <span className="help-block">{this.state.confirmPassword.message}</span>
-                            </div>
-                            <div className="form-group">
-                                <div className="col-sm-5 col-sm-offset-5">
-                                    <button
-                                        type="submit"
-                                        className="btn btn-success"
-                                        style={{ marginRight: 10 }}
-                                    >Create</button>
-                                    <button
-                                        type="button"
-                                        onClick={this.closeRegUser.bind(this)}
-                                        className="btn btn-danger"
-                                    >Close</button>
+                                <div className="modal-footer">
+                                    <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
                                 </div>
                             </div>
-                        </form>
+                        </div>
                     </div>
                 </div>
             </div>

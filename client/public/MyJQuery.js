@@ -1,4 +1,10 @@
 $(document).ready(function () {
+    $("#btnTestForm").click(function(){
+        if($("#testForm").find("div").hasClass("has-error")){
+            $("#testForm").modal("hide")
+        }
+    });
+
     // //UserLogin
     // $('#openUserLogin').click(function () {
     //     $('#userLogin').modal({
