@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import { addUser } from './../../actions/userActions'
+import { addUser, getUsers } from './../../actions/userActions'
+import validator from 'validator'
 
 class TestForm extends Component {
     constructor(props) {
@@ -28,14 +29,19 @@ class TestForm extends Component {
             }
         }
     }
-
     onChange(e) {
         var target = e.target;
         var name = target.name;
         var value = target.value;
-        this.setState({
+        var newState = {
             ...this.state,
-        })
+            [name]:{
+                ...this.state[name],
+                value
+            }
+
+        }
+        this.setState(newState)
     }
     clearForm() {
         this.setState({
@@ -45,18 +51,89 @@ class TestForm extends Component {
             confirmPassword: ''
         })
     }
-    createUser() {
-        var { userName, displayName, password, confirmPassword } = this.state;
-        if (userName && displayName && password && confirmPassword && (password === confirmPassword)) {
-            var newUser = {
-                userName,
-                displayName,
-                password
+    componentDidMount(){
+        this.props.getUsers();
+    }
+    
+    createUser(e) {
+        e.preventDefault();
+        var {userName, displayName, password, confirmPassword} = this.state;
+        var {users} = this.props.users
+        var availablUserName = false;
+   
+        //check User Name
+        const checkUserName = (newUserName)=>{
+            for (let index = 0; index < users.length; index++) {
+                const user = users[index];
+                if(user.userName === newUserName){
+                    availablUserName === true;
+                }
             }
-            this.props.addUser(newUser)
-            alert('Add User Successful!!')
-            this.clearForm();
+            if(validator.isEmpty){
+                this.setState({
+                    userName:{
+                        ...userName,
+                        isValid: false,
+                        message: 'User can not be blanked!!!!'
+                    }
+                })
+            }else if(availablUserName){
+                this.setState({
+                    userName:{
+                        isValid: false,
+                        message: 'You user name is avalable!!!!'
+                    }
+                }) 
+            }else{
+                return -1
+            }
         }
+        console.log(availablUserName)
+        checkUserName(userName.value)
+
+        // //check Display Name
+        // const checkDisplayName = (newUserName)=>{
+        //     var availablUserName = false;
+        //     for (let index = 0; index < users.length; index++) {
+        //         const user = users[index];
+        //         if(user.userName === newUserName){
+        //             availablUserName = true;
+        //         }
+        //     }
+        //     if(validator.isEmpty){
+        //         this.setState({
+        //             userName:{
+        //                 isValid: false,
+        //                 message: 'User can not be blanked!!!!'
+        //             }
+        //         })
+        //     }else if(availablUserName){
+        //         this.setState({
+        //             userName:{
+        //                 isValid: false,
+        //                 message: 'You user name is avalable!!!!'
+        //             }
+        //         }) 
+        //     }else{
+        //         return -1
+        //     }
+        // }
+        // checkUserName(userName.value)
+
+        
+
+        
+        // var { userName, displayName, password, confirmPassword } = this.state;
+        // if (userName && displayName && password && confirmPassword && (password === confirmPassword)) {
+        //     var newUser = {
+        //         userName,
+        //         displayName,
+        //         password
+        //     }
+        //     this.props.addUser(newUser)
+        //     alert('Add User Successful!!')
+        //     this.clearForm();
+        // }
     }
     closeRegUser() {
         this.clearForm();
@@ -70,7 +147,7 @@ class TestForm extends Component {
                     </div>
                     <div className="panel-body">
                         <form onSubmit={this.createUser.bind(this)} className="form-horizontal">
-                            <div className="form-group has-error">
+                            <div className={this.state.userName.isValid ? "form-group" : "form-group has-error"}>
                                 <label className="col-sm-5 control-label">User Name</label>
                                 <div className="col-sm-5">
                                     <input
@@ -78,13 +155,17 @@ class TestForm extends Component {
                                         className="form-control"
                                         placeholder="User Name"
                                         name="userName"
-                                        value={this.state.userName}
+                                        value={this.state.userName.value}
                                         onChange={this.onChange.bind(this)}
                                     />
                                 </div>
-                                <span className="help-block">Wrong Name</span>
+                                {this.state.userName.message !== '' 
+                                ? <div className="help-block"><span className="glyphicon glyphicon-remove"/> {this.state.userName.message}</div> 
+                                : ''
+                                }
+                                
                             </div>
-                            <div className="form-group">
+                            <div className={this.state.displayName.isValid ? "form-group" : "form-group has-error"}>
                                 <label className="col-sm-5 control-label">Display Name</label>
                                 <div className="col-sm-5">
                                     <input
@@ -92,12 +173,13 @@ class TestForm extends Component {
                                         className="form-control"
                                         placeholder="Display Name"
                                         name="displayName"
-                                        value={this.state.displayName}
+                                        value={this.state.displayName.value}
                                         onChange={this.onChange.bind(this)}
                                     />
                                 </div>
+                                <span className="help-block">{this.state.displayName.message}</span>
                             </div>
-                            <div className="form-group">
+                            <div className={this.state.password.isValid ? "form-group" : "form-group has-error"}>
                                 <label className="col-sm-5 control-label">Password</label>
                                 <div className="col-sm-5">
                                     <input
@@ -105,12 +187,13 @@ class TestForm extends Component {
                                         className="form-control"
                                         placeholder="Password"
                                         name="password"
-                                        value={this.state.password}
+                                        value={this.state.password.value}
                                         onChange={this.onChange.bind(this)}
                                     />
                                 </div>
+                                <span className="help-block">{this.state.password.message}</span>
                             </div>
-                            <div className="form-group">
+                            <div className={this.state.confirmPassword.isValid ? "form-group" : "form-group has-error"}>
                                 <label className="col-sm-5 control-label">Confirm Password</label>
                                 <div className="col-sm-5">
                                     <input
@@ -118,10 +201,11 @@ class TestForm extends Component {
                                         className="form-control"
                                         placeholder="Confirm Password"
                                         name="confirmPassword"
-                                        value={this.state.confirmPassword}
+                                        value={this.state.confirmPassword.value}
                                         onChange={this.onChange.bind(this)}
                                     />
                                 </div>
+                                <span className="help-block">{this.state.confirmPassword.message}</span>
                             </div>
                             <div className="form-group">
                                 <div className="col-sm-5 col-sm-offset-5">
@@ -147,8 +231,8 @@ class TestForm extends Component {
 }
 const mapStateToProps = state => {
     return {
-
+        users: state.users
     }
 }
 
-export default connect(mapStateToProps, { addUser })(TestForm);
+export default connect(mapStateToProps, { addUser, getUsers })(TestForm);
