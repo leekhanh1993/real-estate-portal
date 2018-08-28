@@ -6,6 +6,7 @@ import ManageProduct from '../Product/ManageProduct';
 import EditProduct from '../Product/EditProduct';
 import EditProject from '../Project/EditProject';
 import HomePage from '../Homepage/HomePage';
+import TestForm from '../App/TestForm';
 
 
 class RouterUrl extends Component {
@@ -20,6 +21,7 @@ class RouterUrl extends Component {
                     <Route path="/manageproject" component={ManageProject} />
                     <Route path="/edit/:_id" component={EditProduct} />
                     <Route path="/edit-project/:_id" component={EditProject} />
+                    <Route path="/testform" component={TestForm} />
                     <Route path="/home" component={HomePage}/>
                     <Route component={HomePage}/>   
                 </Switch>
