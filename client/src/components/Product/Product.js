@@ -103,7 +103,7 @@ class Product extends Component {
     format_currency = (price) => {
         var value = String(price)
         return value.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.");
-      }
+    }
 
     render() {
         var { ads } = this.props.ads;
@@ -141,8 +141,8 @@ class Product extends Component {
             ads = ads.sort((a, b) => {
                 var firstPrice = parseInt(a.price)
                 var SecondPrice = parseInt(b.price)
-                if(firstPrice > SecondPrice) return 1
-                else if(firstPrice < SecondPrice) return -1
+                if (firstPrice > SecondPrice) return 1
+                else if (firstPrice < SecondPrice) return -1
                 else return 0;
             })
         }
@@ -150,8 +150,8 @@ class Product extends Component {
             ads = ads.sort((a, b) => {
                 var firstPrice = parseInt(a.price)
                 var SecondPrice = parseInt(b.price)
-                if(firstPrice > SecondPrice) return -1
-                else if(firstPrice < SecondPrice) return 1
+                if (firstPrice > SecondPrice) return -1
+                else if (firstPrice < SecondPrice) return 1
                 else return 0;
             })
         }
@@ -200,8 +200,6 @@ class Product extends Component {
                 onClick={this.onSearchByNumFloor.bind(this, num)}
             ><a>{num}</a></li>
         })
-
-
 
         //Redner all advertisements
         var listAllADs = ads.map((ad, index) => {
@@ -381,7 +379,6 @@ class Product extends Component {
                         {listAllADs}
                     </div>
                 </div>
-
             </div>
         );
     }
