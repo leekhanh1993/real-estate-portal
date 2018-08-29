@@ -1,8 +1,42 @@
 $(document).ready(function () {
-    $("#btnTestForm").click(function(){
-        if($("#testForm").find("div").hasClass("has-error")){
-            $("#testForm").modal("hide")
+
+    $("#btnTestForm").click(function () {
+        var isEmptyInput = [];
+        $("#testFormValidation").find("input").each(function (index, element) {
+            if ($(element).val() === '') {
+                isEmptyInput.push(true)
+            }
+        })
+
+        if (!isEmptyInput.includes(true)) {
+            $("#testFormValidation").find("span").each(function (index, element) {
+                if($(element).hasClass("form-control-feedback")){
+                    alert("Invalid" + index)
+                }
+            })
         }
+
+
+        // if(isValidForm.includes(true)){
+        //     $("#testForm").modal("hide")
+        // }
+
+        // var isValid;
+        // if ($("#testFormValidation").find("span").eq(0).hasClass("form-control-feedback")) {
+        //     isValid = false
+        // }
+        // if ($("#testFormValidation").find("span").eq(1).hasClass("form-control-feedback")) {
+        //     isValid = false
+        // }
+        // if ($("#testFormValidation").find("span").eq(2).hasClass("form-control-feedback")) {
+        //     isValid = false
+        // }
+        // if ($("#testFormValidation").find("span").eq(3).hasClass("form-control-feedback")) {
+        //     isValid = false
+        // }
+        // if(isValid){
+        //     alert("Close Modal")
+        // }
     });
 
     // //UserLogin

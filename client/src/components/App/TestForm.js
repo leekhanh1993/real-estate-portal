@@ -26,7 +26,8 @@ class TestForm extends Component {
                 value: '',
                 isValid: true,
                 message: ''
-            }
+            },
+            isFormValid: ""
         }
     }
     onChange(e) {
@@ -80,6 +81,7 @@ class TestForm extends Component {
                 isValid: true,
                 message: ''
             },
+            isFormValid: ''
         }
         this.setState(newState)
 
@@ -178,6 +180,9 @@ class TestForm extends Component {
 
 
         if (resultCheckUserName && resultCheckDisplayName && resultCheckPassword && resultCheckConfirmPassword) {
+            this.setState({
+                isFormValid: 'validForm'
+            })
             var newUser = {
                 userName: userName.value,
                 displayName: displayName.value,
@@ -208,7 +213,7 @@ class TestForm extends Component {
                     {/* Trigger the modal with a button */}
                     <button type="button" className="btn btn-info btn-lg" data-toggle="modal" data-target="#testForm">Open Modal</button>
                     {/* Modal */}
-                    <div id="testForm" className="modal fade" role="dialog">
+                    <div id="testForm" className={this.state.isFormValid === '' ? "modal fade" : ('modal fade ' + this.state.isFormValid)} role="dialog">
                         <div className="modal-dialog">
                             {/* Modal content*/}
                             <div className="modal-content">
@@ -222,7 +227,7 @@ class TestForm extends Component {
                                             <h3 className="panel-title">Test Form</h3>
                                         </div>
                                         <div className="panel-body">
-                                            <form onSubmit={this.createUser.bind(this)} className="form-horizontal">
+                                            <form id="testFormValidation" onSubmit={this.createUser.bind(this)} className="form-horizontal">
                                                 <div className={this.state.userName.isValid ? "form-group" : "form-group has-error has-feedback"}>
                                                     <label className="control-label col-sm-5">User Name</label>
                                                     <div className="col-sm-5">
