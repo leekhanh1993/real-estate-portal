@@ -1,54 +1,68 @@
 import React, { Component } from 'react';
+import {connect} from 'react-redux'
+import {getAD} from '../../actions/adActions'
+import {getPROs} from '../../actions/proActions'
 
 class DetailPages extends Component {
-    render() {
-        return (
-            <div className="container-fluid">
-
-                {/* Full Picture */}
-                <div>
-
-                        <div className="row">
+  componentDidMount(){
+    var id = this.props.match.params._id
+    this.props.getAD(id)
+    this.props.getPROs();
+  }
+  format_currency = (price) => {
+    var value = String(price)
+    return value.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.");
+  }
+  render() {
+    var {pros} = this.props.projects;
+    var ad = this.props.advertisement;
+    //get name type project
+    var typeProject;
+    for (let index = 0; index < pros.length; index++) {
+      const project = pros[index];
+      if(project._id === ad.idProject){
+        typeProject = project.typePro
+      }
+    }
+    return (
+      <div className="container-fluid" style={{ paddingTop: 10 }}>
+        {/* Full Picture */}
+        <div><div className="row">
           {/* Carousel */}
           <div id="carousel-example-generic" className="carousel slide" data-ride="carousel">
             {/* Indicators */}
             <ol className="carousel-indicators">
               <li data-target="#carousel-example-generic" data-slide-to={0} className="active" />
-              
             </ol>
             {/* Wrapper for slides */}
-            <div className="carousel-inner" style={{maxHeight:"300pt"}} >
+            <div className="carousel-inner" style={{ maxHeight: "300pt" }} >
               <div className="item active">
-                <img src="http://www.apartmentsvinhomescentralpark.com/images/products/pic-big-4-bedroom-apartment-at-corner-in-park-6-vinhomes-center-park-for-rent-2015102415485.jpg" alt="First slide" />
+                <img src={ad.imageUrl} alt="First slide" />
                 {/* Static Header */}
                 <div className="header-text-detail hidden-xs">
                   <div className="col-md-12 text-center">
-                    
-                    
                     <div>
                       <a className="btn btn-theme btn-sm btn-min-block" >Quick View</a>
-                    </div> 
-                     
-                      
+                    </div>
                   </div>
                 </div>{/* /header-text */}
-                
+
               </div>
-             
+
             </div>
-            
-           
+
+
           </div>{/* /carousel */}
         </div>
-                
-                </div>
 
-            {/* Two Columns */}
+        </div>
+
+        {/* Two Columns */}
 
 
-            <div>
-            <div className="container-fluid container-full-height" style={{backgroundColor:"white",paddingTop:"2%"}} >
-        <div className="row row-full-height">
+        <div>
+          <div className="container-fluid container-full-height" style={{ backgroundColor: "white", paddingTop: "2%" }} >
+            <div className="row row-full-height">
           <div className="hidden-xs col-sm-6 col-md-8 col-full-height login-main-content">
             <div className="row">
               <div className="col-md-10 col-md-offset-1">
@@ -60,30 +74,26 @@ class DetailPages extends Component {
                 <a className="item" href=""style={{textDecoration:"none"}}>Facilities</a>
                 </div>
                 </div>
-                <h3 class="content-box-title">CITY GARDEN APARTMENT 1 BEDROOM - FULLY FURNISHED & MODERN</h3>
+                <h3 class="content-box-title">{ad.title}</h3>
                 <p className="btn btn-default pull-right">
                 H135992 <br/>
                 <b>House Code</b> 
                 </p>
-                <p className="content-box-tagline fa fa-map-marker">Binh Thanh District, Ho Chi Minh</p>
-                
+                <p className="content-box-tagline"><span className="fa fa-map-marker"></span> {ad.area}</p>
+
                 <p class="content-box-title" style={{fontSize:"15pt",paddingTop:"20pt"}} >Overview</p>
                 <div className="row" style={{paddingLeft:"10pt"}} >
-                    <div className="col-sm-6 over fa fa-building-o">
-                    Apartment
-                    
-                    </div>
+                    <div className="col-sm-6 over fa fa-building-o">{typeProject}</div>
                     <div className="col-sm-6 over fa fa-area-chart">
                     69.00m2
-                    
+
                     </div>
                     <div className="col-sm-6 over fa fa-bath">
                     1 Bathroom(s)
                     
                     </div>
-                    <div className="col-sm-6 over fa fa-bed">
-                    1 Bethroom(s)
-                    
+                    <div className="col-sm-6 over">
+                    <span className="fa fa-bed"/> {ad.numbedrooms} Bethroom(s)
                     </div>
                     <div className="col-sm-6 over fa fa-group">
                     2 Accomodate(s)
@@ -100,7 +110,7 @@ class DetailPages extends Component {
               <div className="col-md-10 col-md-offset-1">
               <p class="content-box-title" style={{fontSize:"15pt",paddingTop:"20pt"}} >Description</p>
               <div class="content-box-text">
-              <p>Address: Ngo Tat To, Ward 21, Binh Thanh District, Ho Chi Minh </p>
+              <p>Address: {ad.address}</p>
               <p>Overview: modern and fully furnishings, great view, open living space, high-quality interiors, panoramic city view</p>
               <p>Amenities: large double bed, wardrobe, induction hob, chimney, refrigerator, microwave</p>
               <p>Project Facility: parking lot,children's playground, convenient stores, international garden, outdoor gym and fitness area, multi-purpose courtyard, </p>
@@ -329,7 +339,7 @@ class DetailPages extends Component {
             <div class="col-sm-10 col-sm-offset-1">
             
             <div className="contactHeader" style={{textAlign:"center"}}>
-            <b className="content-box-tagline" style={{fontSize:"18pt",paddingRight:"3pt"}} >900$</b>
+            <b className="content-box-tagline" style={{fontSize:"18pt",paddingRight:"3pt"}} >{this.format_currency(ad.price)} VND</b>
 
             <span>per month</span> </div>
             <div style={{textAlign:"center",paddingBottom:"10pt",paddingTop:"8pt"}}>
@@ -404,24 +414,23 @@ class DetailPages extends Component {
 
                 
                 
-                  
+
                 </div>
               </div>
-              
-
             </div>
-            
           </div>
         </div>
       </div>
             </div>
-
-
-            
-                
             </div>
         );
     }
 }
 
-export default DetailPages;
+const mapStateToProps = state =>{
+  return{
+    projects: state.pros,
+    advertisement: state.ad
+  }
+}
+export default connect(mapStateToProps, {getAD, getPROs})(DetailPages);
