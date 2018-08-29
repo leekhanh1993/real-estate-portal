@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 class DetailPages extends Component {
     render() {
         return (
-            <div>
+            <div className="container-fluid">
 
                 {/* Full Picture */}
                 <div>

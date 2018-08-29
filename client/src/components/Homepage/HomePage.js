@@ -21,7 +21,7 @@ setLogOut() {
     render() {
       
         return (
-            <div>
+            <div className="container-fluid">
         <div className="row">
           {/* Carousel */}
           <div id="carousel-example-generic" className="carousel slide" data-ride="carousel">

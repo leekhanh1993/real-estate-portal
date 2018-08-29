@@ -163,7 +163,7 @@ padding: 15px;
     transition: all 0.5s;
     
     background-color: #fff;
-    border-bottom: solid 1px  #c3c3c3;
+    box-shadow: 5px 0px 15px  #c3c3c3;
     padding-bottom: 70px;
     
 }
