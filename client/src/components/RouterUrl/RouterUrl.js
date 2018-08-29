@@ -6,6 +6,7 @@ import ManageProduct from '../Product/ManageProduct';
 import EditProduct from '../Product/EditProduct';
 import EditProject from '../Project/EditProject';
 import HomePage from '../Homepage/HomePage';
+import DetailPages from '../DetailPages/DetailPages';
 
 
 class RouterUrl extends Component {
@@ -21,6 +22,7 @@ class RouterUrl extends Component {
                     <Route path="/edit/:_id" component={EditProduct} />
                     <Route path="/edit-project/:_id" component={EditProject} />
                     <Route path="/home" component={HomePage}/>
+                    <Route path="/detail" component={DetailPages}/>
                     <Route component={HomePage}/>   
                 </Switch>
             </div>

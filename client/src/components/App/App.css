@@ -163,8 +163,9 @@ padding: 15px;
     transition: all 0.5s;
     
     background-color: #fff;
-    box-shadow: 5px 0px 15px #c3c3c3;
+    box-shadow:  #c3c3c3;
     padding-bottom: 70px;
+    
 }
 #header #logo h1 {
     font-size: 34px;
@@ -778,4 +779,113 @@ Customer Reviews */
     color: orange;
 }
 
+
+/* Detail */
+.header-text-detail {
+    position: absolute;
+    top: 80%;
+    left: 1.8%;
+    right: auto;
+    width: 96.66666666666666%;
+    color:lawngreen;
+  }
+
+  /* Collumns */
+  /** Column  **/
+
+.container-full-height {
+    height: 100%;
+}
+
+.container-full-height, .row-full-height, .col-full-height {
+    height: 100%;
+}
+
+.col-vertical-height {
+    display: table !important;
+}
+
+.col-vertical-top {
+    display: table-row;
+    vertical-align: top;
+}
+
+.col-vertical-middle {
+    display: table-row;
+    vertical-align: middle;
+}
+
+.col-vertical-bottom {
+    display: table-row;
+    vertical-align: bottom;
+}
+
+.vertical-center {
+  min-height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+#listsection{
+    padding-left: 5pt;
+    border-bottom: 1px solid lightgrey;
+    padding-bottom: 15pt;
+   
+}
+
+.item{
+    
+    padding-left: 10pt;
+    color: #131313;
+    
+}
+
+.over{
+    padding: 5pt;
+    font-size: 9pt;
+   
+}
+.content-box-text{
+    font-size: 8pt;
+    
+}
+
+.form-area{
+    border: 1px solid GREY;
+    background-color: white;
+    
+    margin-right: 40pt;
+}
+
+.lion{
+    text-align: center;
+    
+}
+
+
+
+/* Container After */
+
+.container-after{
+background-color:white;
+padding-top: 15px;
+padding-bottom: 15px;
+font-size: 12pt;
+width: 100%;
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/** NavBar**/
 

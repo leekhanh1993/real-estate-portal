@@ -100,23 +100,23 @@ setLogOut() {
 
 
         {/*After Carousel  */}
-        <div className="container" style={{backgroundColor:"lightgray",paddingTop:"15px",paddingBottom:"15px",width:"100%",fontSize:"12pt"}} >
-          <div className="row"  >
-            <div className="col-md-4 text-center" >
+        <div className="container-after fluid" >
+          <div className="row">
+            <div className="col-sm-4 text-center" >
             <span className="glyphicon glyphicon-check"></span>
              <span>
              Vertifies Listing
                </span> 
 
             </div>
-            <div className="col-md-4 text-center" >
+            <div className="col-sm-4 text-center" >
             <span className="glyphicon glyphicon-hd-video"></span>
              <span>
              Support High Quality Images
                </span> 
 
             </div>
-            <div className="col-md-4 text-center" >
+            <div className="col-sm-4 text-center" >
             <span className="	glyphicon glyphicon-bitcoin"></span>
              <span>
              Share Multiple Prices

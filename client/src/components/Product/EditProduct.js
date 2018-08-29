@@ -94,7 +94,7 @@ class EditProduct extends Component {
             return <option key={index} value={project._id}>{project.name}</option>
         })
         return (
-            <div className="container">
+            <div className="container" style={{paddingTop:"5%"}} >
                 <div className="panel panel-default">
                     <div className="panel-heading">
                         <h3 className="panel-title text-center">Edit Advertisement</h3>
