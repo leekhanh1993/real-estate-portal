@@ -39,7 +39,7 @@ class AddUser extends Component {
     }
     createUser() {
         var { userName, displayName, password, confirmPassword } = this.state;
-        if (userName && displayName && password && confirmPassword) {
+        if (userName && displayName && password && confirmPassword && (password === confirmPassword)) {
             var newUser = {
                 userName,
                 displayName,
@@ -65,7 +65,7 @@ class AddUser extends Component {
                                 <h4 className="modal-title text-center">Create User</h4>
                             </div>
                             <div className="modal-body">
-                                <form onSubmit={this.createUser.bind(this)} id="registerUserForm" className="form-horizontal">
+                                <form noValidate onSubmit={this.createUser.bind(this)} id="registerUserForm" className="form-horizontal">
                                     <div className="form-group">
                                         <label className="col-sm-5 control-label">User Name</label>
                                         <div className="col-sm-5">
