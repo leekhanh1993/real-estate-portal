@@ -74,14 +74,14 @@ class DetailPages extends Component {
                 <a className="item" href=""style={{textDecoration:"none"}}>Facilities</a>
                 </div>
                 </div>
-                <h3 class="content-box-title">{ad.title}</h3>
+                <h3 className="content-box-title">{ad.title}</h3>
                 <p className="btn btn-default pull-right">
                 H135992 <br/>
                 <b>House Code</b> 
                 </p>
                 <p className="content-box-tagline"><span className="fa fa-map-marker"></span> {ad.area}</p>
 
-                <p class="content-box-title" style={{fontSize:"15pt",paddingTop:"20pt"}} >Overview</p>
+                <p className="content-box-title" style={{fontSize:"15pt",paddingTop:"20pt"}} >Overview</p>
                 <div className="row" style={{paddingLeft:"10pt"}} >
                     <div className="col-sm-6 over fa fa-building-o">{typeProject}</div>
                     <div className="col-sm-6 over fa fa-area-chart">
@@ -108,8 +108,8 @@ class DetailPages extends Component {
 
               </div>
               <div className="col-md-10 col-md-offset-1">
-              <p class="content-box-title" style={{fontSize:"15pt",paddingTop:"20pt"}} >Description</p>
-              <div class="content-box-text">
+              <p className="content-box-title" style={{fontSize:"15pt",paddingTop:"20pt"}} >Description</p>
+              <div className="content-box-text">
               <p>Address: {ad.address}</p>
               <p>Overview: modern and fully furnishings, great view, open living space, high-quality interiors, panoramic city view</p>
               <p>Amenities: large double bed, wardrobe, induction hob, chimney, refrigerator, microwave</p>
@@ -117,32 +117,27 @@ class DetailPages extends Component {
               <p>Nearby places: Zoo, Botanic Garden, Universities, historic places</p>
               <p>Traffic: 5 minutes to District 1, 5 minutes to Ben Thanh Market, 15 minutes to District 7</p>
               </div>
-
-                
               </div>
               <div className="col-md-10 col-md-offset-1">
-              <p class="content-box-title" style={{fontSize:"15pt",paddingTop:"20pt"}} >Summary</p>
-              <div class="content-box-text">
+              <p className="content-box-title" style={{fontSize:"15pt",paddingTop:"20pt"}} >Summary</p>
+              <div className="content-box-text">
               <p>Rent City Garden Apartment at Ngo Tat To Street, Ward 21, Binh Thanh District, Ho Chi Minh. Modern Apartment near Saigon Zoo & Botanical Garden that has City View, long-time rental for at least 6 months.</p>
-              
               </div>
-              
-                
               </div>
               <div className="col-md-10 col-md-offset-1">
-              <p class="content-box-title" style={{fontSize:"15pt",paddingTop:"20pt"}} >Amentities</p>
+              <p className="content-box-title" style={{fontSize:"15pt",paddingTop:"20pt"}} >Amentities</p>
               <div className="row" style={{paddingLeft:"10pt"}}>
               <div className="col-sm-3 over fa fa-check">
                     TV
-                    
+
                     </div>
                     <div className="col-sm-3 over fa fa-check">
                     Microwave
-                    
+
                     </div>
                     <div className="col-sm-3 over fa fa-check">
                     Air conditioner
-                    
+
                     </div>
                     <div className="col-sm-3 over fa fa-check">
                     Smoke detector
@@ -150,7 +145,7 @@ class DetailPages extends Component {
                     </div>
                     <div className="col-sm-3 over fa fa-check">
                     Fire extinguisher
-                    
+
                     </div>
                     <div className="col-sm-3 over fa fa-check">
                     Balcony
@@ -158,11 +153,11 @@ class DetailPages extends Component {
                     </div>
                     <div className="col-sm-3 over fa fa-check">
                     Bathtub
-                    
+
                     </div>
                     <div className="col-sm-3 over fa fa-check">
                     Geyser
-                    
+
                     </div>
                     <div className="col-sm-3 over fa fa-check">
                     Dish Washer
@@ -174,7 +169,7 @@ class DetailPages extends Component {
                     </div>
                     <div className="col-sm-3 over fa fa-check">
                     Parking
-                    
+
                     </div>
                     <div className="col-sm-3 over fa fa-check">
                     Room Heater
@@ -186,7 +181,7 @@ class DetailPages extends Component {
                     </div>
                     <div className="col-sm-3 over fa fa-check">
                     Essentials
-                    
+
                     </div>
                     <div className="col-sm-3 over fa fa-check">
                     Pet Allowed
@@ -202,30 +197,30 @@ class DetailPages extends Component {
                     </div>
                     <div className="col-sm-3 over fa fa-check">
                     Elevator
-                    
+
                     </div>
                     <div className="col-sm-3 over fa fa-check">
                     Washing Machine
-                    
+
                     </div>
                     <div className="col-sm-3 over fa fa-check">
                     Wi-Fi
-                    
+
                     </div>
                     <div className="col-sm-3 over fa fa-check">
                     Internet
-                    
+
                     </div>
 
-              
+
               </div>
-              
-                
+
+
               </div>
 
               {/* Facilities */}
               <div className="col-md-10 col-md-offset-1">
-              <p class="content-box-title" style={{fontSize:"15pt",paddingTop:"20pt"}} >Amentities</p>
+              <p className="content-box-title" style={{fontSize:"15pt",paddingTop:"20pt"}} >Amentities</p>
               <div className="row" style={{paddingLeft:"10pt"}}>
               <div className="col-sm-3 over fa fa-check">
               24Hr Electricity Backup
@@ -336,7 +331,7 @@ class DetailPages extends Component {
             
             <h3 style={{textAlign:"center"}}>MKestates</h3>
             <div className="form-group">
-            <div class="col-sm-10 col-sm-offset-1">
+            <div className="col-sm-10 col-sm-offset-1">
             
             <div className="contactHeader" style={{textAlign:"center"}}>
             <b className="content-box-tagline" style={{fontSize:"18pt",paddingRight:"3pt"}} >{this.format_currency(ad.price)} VND</b>
