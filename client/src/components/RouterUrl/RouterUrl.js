@@ -6,11 +6,8 @@ import ManageProduct from '../Product/ManageProduct';
 import EditProduct from '../Product/EditProduct';
 import EditProject from '../Project/EditProject';
 import HomePage from '../Homepage/HomePage';
-<<<<<<< HEAD
 import DetailPages from '../DetailPages/DetailPages';
-=======
 import TestForm from '../App/TestForm';
->>>>>>> 9633f295fc5adcbde7ec60c8efcb963c47907358
 
 
 class RouterUrl extends Component {

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { addUser, getUsers } from './../../actions/userActions'
-import validator from 'validator'
+
 
 class TestForm extends Component {
     constructor(props) {
