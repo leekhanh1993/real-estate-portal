@@ -223,7 +223,7 @@ class TestForm extends Component {
                                         </div>
                                         <div className="panel-body">
                                             <form onSubmit={this.createUser.bind(this)} className="form-horizontal">
-                                                <div className={this.state.userName.isValid ? "form-group" : "form-group has-error"}>
+                                                <div className={this.state.userName.isValid ? "form-group" : "form-group has-error has-feedback"}>
                                                     <label className="control-label col-sm-5">User Name</label>
                                                     <div className="col-sm-5">
                                                         <input
@@ -236,12 +236,12 @@ class TestForm extends Component {
                                                             onChange={this.onChange.bind(this)}
                                                         />
                                                         {this.state.userName.message !== ''
-                                                            ? <small className="text-danger">{this.state.userName.message}</small>
+                                                            ? [<span className="glyphicon glyphicon-remove form-control-feedback"></span>, <small className="text-danger">{this.state.userName.message}</small>]
                                                             : ''
                                                         }
                                                     </div>
                                                 </div>
-                                                <div className={this.state.displayName.isValid ? "form-group" : "form-group has-error"}>
+                                                <div className={this.state.displayName.isValid ? "form-group" : "form-group has-error has-feedback"}>
                                                     <label className="col-sm-5 control-label">Display Name</label>
                                                     <div className="col-sm-5">
                                                         <input
@@ -253,12 +253,12 @@ class TestForm extends Component {
                                                             onChange={this.onChange.bind(this)}
                                                         />
                                                         {this.state.displayName.message !== ''
-                                                            ? <small className="text-danger">{this.state.displayName.message}</small>
+                                                            ? [<span key="1" className="glyphicon glyphicon-remove form-control-feedback"></span>, <small key="2" className="text-danger">{this.state.displayName.message}</small>]
                                                             : ''
                                                         }
                                                     </div>
                                                 </div>
-                                                <div className={this.state.password.isValid ? "form-group" : "form-group has-error"}>
+                                                <div className={this.state.password.isValid ? "form-group" : "form-group has-error has-feedback"}>
                                                     <label className="col-sm-5 control-label">Password</label>
                                                     <div className="col-sm-5">
                                                         <input
@@ -270,12 +270,12 @@ class TestForm extends Component {
                                                             onChange={this.onChange.bind(this)}
                                                         />
                                                         {this.state.password.message !== ''
-                                                            ? <small className="text-danger">{this.state.password.message}</small>
+                                                            ? [<span key="1" className="glyphicon glyphicon-remove form-control-feedback"></span>, <small key="2" className="text-danger">{this.state.password.message}</small>]
                                                             : ''
                                                         }
                                                     </div>
                                                 </div>
-                                                <div className={this.state.confirmPassword.isValid ? "form-group" : "form-group has-error"}>
+                                                <div className={this.state.confirmPassword.isValid ? "form-group" : "form-group has-error has-feedback"}>
                                                     <label className="col-sm-5 control-label">Confirm Password</label>
                                                     <div className="col-sm-5">
                                                         <input
@@ -287,7 +287,7 @@ class TestForm extends Component {
                                                             onChange={this.onChange.bind(this)}
                                                         />
                                                         {this.state.confirmPassword.message !== ''
-                                                            ? <small className="text-danger">{this.state.confirmPassword.message}</small>
+                                                            ? [<span key="1" className="glyphicon glyphicon-remove form-control-feedback"></span>, <small key="2" className="text-danger">{this.state.confirmPassword.message}</small>]
                                                             : ''
                                                         }
                                                     </div>
