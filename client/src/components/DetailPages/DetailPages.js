@@ -402,22 +402,15 @@ class DetailPages extends Component {
                 <a href="https://www.vinhomes.vn/vinhomes/vinhomes-central-park.html">  <b>Vinhomes Central Park</b> </a> 
                 <p>Vinhomes Central Park is located in the heart of Ho Chi Minh city, within Tan Cang area......</p>
                 </div>
-
-                
                 </div>
-
-                
                 </div>
-
-                
-                
-
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
+            </div>
             </div>
             </div>
         );
