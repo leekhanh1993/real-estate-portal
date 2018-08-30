@@ -215,8 +215,8 @@ class DetailPages extends Component {
 
               {/* Facilities */}
               <div className="col-md-10 col-md-offset-1">
-              <p class="content-box-title" style={{fontSize:"15pt",paddingTop:"20pt"}} >Amentities</p>
-              <div className="row" style={{paddingLeft:"10pt"}}>
+              <p class="content-box-title" style={{fontSize:"15pt",paddingTop:"20pt"}} >Facilities</p>
+              <div className="row" style={{paddingLeft:"10pt",paddingBottom:"20pt"}}>
               <div className="col-sm-3 over fa fa-check">
               24Hr Electricity Backup
                     
