@@ -27,6 +27,7 @@ class RouterUrl extends Component {
                     <Route path="/home" component={HomePage}/>
                     <Route path="/detail" component={DetailPages}/>
                     <Route path="/contact" component={Contact}/>
+                    <Route path="/detail/:_id" component={DetailPages}/>
                     <Route component={HomePage}/>   
                 </Switch>
             </div>

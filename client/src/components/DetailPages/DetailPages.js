@@ -1,54 +1,68 @@
 import React, { Component } from 'react';
+import {connect} from 'react-redux'
+import {getAD} from '../../actions/adActions'
+import {getPROs} from '../../actions/proActions'
 
 class DetailPages extends Component {
-    render() {
-        return (
-            <div className="container-fluid">
-
-                {/* Full Picture */}
-                <div>
-
-                        <div className="row">
+  componentDidMount(){
+    var id = this.props.match.params._id
+    this.props.getAD(id)
+    this.props.getPROs();
+  }
+  format_currency = (price) => {
+    var value = String(price)
+    return value.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.");
+  }
+  render() {
+    var {pros} = this.props.projects;
+    var ad = this.props.advertisement;
+    //get name type project
+    var typeProject;
+    for (let index = 0; index < pros.length; index++) {
+      const project = pros[index];
+      if(project._id === ad.idProject){
+        typeProject = project.typePro
+      }
+    }
+    return (
+      <div className="container-fluid" style={{ paddingTop: 10 }}>
+        {/* Full Picture */}
+        <div><div className="row">
           {/* Carousel */}
           <div id="carousel-example-generic" className="carousel slide" data-ride="carousel">
             {/* Indicators */}
             <ol className="carousel-indicators">
               <li data-target="#carousel-example-generic" data-slide-to={0} className="active" />
-              
             </ol>
             {/* Wrapper for slides */}
-            <div className="carousel-inner" style={{maxHeight:"300pt"}} >
+            <div className="carousel-inner" style={{ maxHeight: "300pt" }} >
               <div className="item active">
-                <img src="http://www.apartmentsvinhomescentralpark.com/images/products/pic-big-4-bedroom-apartment-at-corner-in-park-6-vinhomes-center-park-for-rent-2015102415485.jpg" alt="First slide" />
+                <img src={ad.imageUrl} alt="First slide" />
                 {/* Static Header */}
                 <div className="header-text-detail hidden-xs">
                   <div className="col-md-12 text-center">
-                    
-                    
                     <div>
                       <a className="btn btn-theme btn-sm btn-min-block" >Quick View</a>
-                    </div> 
-                     
-                      
+                    </div>
                   </div>
                 </div>{/* /header-text */}
-                
+
               </div>
-             
+
             </div>
-            
-           
+
+
           </div>{/* /carousel */}
         </div>
-                
-                </div>
 
-            {/* Two Columns */}
+        </div>
+
+        {/* Two Columns */}
 
 
-            <div>
-            <div className="container-fluid container-full-height" style={{backgroundColor:"white",paddingTop:"2%"}} >
-        <div className="row row-full-height">
+        <div>
+          <div className="container-fluid container-full-height" style={{ backgroundColor: "white", paddingTop: "2%" }} >
+            <div className="row row-full-height">
           <div className="hidden-xs col-sm-6 col-md-8 col-full-height login-main-content">
             <div className="row">
               <div className="col-md-10 col-md-offset-1">
@@ -60,30 +74,26 @@ class DetailPages extends Component {
                 <a className="item" href=""style={{textDecoration:"none"}}>Facilities</a>
                 </div>
                 </div>
-                <h3 class="content-box-title">CITY GARDEN APARTMENT 1 BEDROOM - FULLY FURNISHED & MODERN</h3>
+                <h3 className="content-box-title">{ad.title}</h3>
                 <p className="btn btn-default pull-right">
                 H135992 <br/>
                 <b>House Code</b> 
                 </p>
-                <p className="content-box-tagline fa fa-map-marker">Binh Thanh District, Ho Chi Minh</p>
-                
-                <p class="content-box-title" style={{fontSize:"15pt",paddingTop:"20pt"}} >Overview</p>
+                <p className="content-box-tagline"><span className="fa fa-map-marker"></span> {ad.area}</p>
+
+                <p className="content-box-title" style={{fontSize:"15pt",paddingTop:"20pt"}} >Overview</p>
                 <div className="row" style={{paddingLeft:"10pt"}} >
-                    <div className="col-sm-6 over fa fa-building-o">
-                    Apartment
-                    
-                    </div>
+                    <div className="col-sm-6 over fa fa-building-o">{typeProject}</div>
                     <div className="col-sm-6 over fa fa-area-chart">
                     69.00m2
-                    
+
                     </div>
                     <div className="col-sm-6 over fa fa-bath">
                     1 Bathroom(s)
                     
                     </div>
-                    <div className="col-sm-6 over fa fa-bed">
-                    1 Bethroom(s)
-                    
+                    <div className="col-sm-6 over">
+                    <span className="fa fa-bed"/> {ad.numbedrooms} Bethroom(s)
                     </div>
                     <div className="col-sm-6 over fa fa-group">
                     2 Accomodate(s)
@@ -98,41 +108,36 @@ class DetailPages extends Component {
 
               </div>
               <div className="col-md-10 col-md-offset-1">
-              <p class="content-box-title" style={{fontSize:"15pt",paddingTop:"20pt"}} >Description</p>
-              <div class="content-box-text">
-              <p>Address: Ngo Tat To, Ward 21, Binh Thanh District, Ho Chi Minh </p>
+              <p className="content-box-title" style={{fontSize:"15pt",paddingTop:"20pt"}} >Description</p>
+              <div className="content-box-text">
+              <p>Address: {ad.address}</p>
               <p>Overview: modern and fully furnishings, great view, open living space, high-quality interiors, panoramic city view</p>
               <p>Amenities: large double bed, wardrobe, induction hob, chimney, refrigerator, microwave</p>
               <p>Project Facility: parking lot,children's playground, convenient stores, international garden, outdoor gym and fitness area, multi-purpose courtyard, </p>
               <p>Nearby places: Zoo, Botanic Garden, Universities, historic places</p>
               <p>Traffic: 5 minutes to District 1, 5 minutes to Ben Thanh Market, 15 minutes to District 7</p>
               </div>
-
-                
               </div>
               <div className="col-md-10 col-md-offset-1">
-              <p class="content-box-title" style={{fontSize:"15pt",paddingTop:"20pt"}} >Summary</p>
-              <div class="content-box-text">
+              <p className="content-box-title" style={{fontSize:"15pt",paddingTop:"20pt"}} >Summary</p>
+              <div className="content-box-text">
               <p>Rent City Garden Apartment at Ngo Tat To Street, Ward 21, Binh Thanh District, Ho Chi Minh. Modern Apartment near Saigon Zoo & Botanical Garden that has City View, long-time rental for at least 6 months.</p>
-              
               </div>
-              
-                
               </div>
               <div className="col-md-10 col-md-offset-1">
-              <p class="content-box-title" style={{fontSize:"15pt",paddingTop:"20pt"}} >Amentities</p>
+              <p className="content-box-title" style={{fontSize:"15pt",paddingTop:"20pt"}} >Amentities</p>
               <div className="row" style={{paddingLeft:"10pt"}}>
               <div className="col-sm-3 over fa fa-check">
                     TV
-                    
+
                     </div>
                     <div className="col-sm-3 over fa fa-check">
                     Microwave
-                    
+
                     </div>
                     <div className="col-sm-3 over fa fa-check">
                     Air conditioner
-                    
+
                     </div>
                     <div className="col-sm-3 over fa fa-check">
                     Smoke detector
@@ -140,7 +145,7 @@ class DetailPages extends Component {
                     </div>
                     <div className="col-sm-3 over fa fa-check">
                     Fire extinguisher
-                    
+
                     </div>
                     <div className="col-sm-3 over fa fa-check">
                     Balcony
@@ -148,11 +153,11 @@ class DetailPages extends Component {
                     </div>
                     <div className="col-sm-3 over fa fa-check">
                     Bathtub
-                    
+
                     </div>
                     <div className="col-sm-3 over fa fa-check">
                     Geyser
-                    
+
                     </div>
                     <div className="col-sm-3 over fa fa-check">
                     Dish Washer
@@ -164,7 +169,7 @@ class DetailPages extends Component {
                     </div>
                     <div className="col-sm-3 over fa fa-check">
                     Parking
-                    
+
                     </div>
                     <div className="col-sm-3 over fa fa-check">
                     Room Heater
@@ -176,7 +181,7 @@ class DetailPages extends Component {
                     </div>
                     <div className="col-sm-3 over fa fa-check">
                     Essentials
-                    
+
                     </div>
                     <div className="col-sm-3 over fa fa-check">
                     Pet Allowed
@@ -192,31 +197,33 @@ class DetailPages extends Component {
                     </div>
                     <div className="col-sm-3 over fa fa-check">
                     Elevator
-                    
+
                     </div>
                     <div className="col-sm-3 over fa fa-check">
                     Washing Machine
-                    
+
                     </div>
                     <div className="col-sm-3 over fa fa-check">
                     Wi-Fi
-                    
+
                     </div>
                     <div className="col-sm-3 over fa fa-check">
                     Internet
-                    
+
                     </div>
 
-              
+
               </div>
-              
-                
+
+
               </div>
 
               {/* Facilities */}
               <div className="col-md-10 col-md-offset-1">
               <p class="content-box-title" style={{fontSize:"15pt",paddingTop:"20pt"}} >Facilities</p>
               <div className="row" style={{paddingLeft:"10pt",paddingBottom:"20pt"}}>
+              <p className="content-box-title" style={{fontSize:"15pt",paddingTop:"20pt"}} >Amentities</p>
+              <div className="row" style={{paddingLeft:"10pt"}}>
               <div className="col-sm-3 over fa fa-check">
               24Hr Electricity Backup
                     
@@ -326,10 +333,10 @@ class DetailPages extends Component {
             
             <h3 style={{textAlign:"center"}}>MKestates</h3>
             <div className="form-group">
-            <div class="col-sm-10 col-sm-offset-1">
+            <div className="col-sm-10 col-sm-offset-1">
             
             <div className="contactHeader" style={{textAlign:"center"}}>
-            <b className="content-box-tagline" style={{fontSize:"18pt",paddingRight:"3pt"}} >900$</b>
+            <b className="content-box-tagline" style={{fontSize:"18pt",paddingRight:"3pt"}} >{this.format_currency(ad.price)} VND</b>
 
             <span>per month</span> </div>
             <div style={{textAlign:"center",paddingBottom:"10pt",paddingTop:"8pt"}}>
@@ -404,24 +411,23 @@ class DetailPages extends Component {
 
                 
                 
-                  
+
                 </div>
               </div>
-              
-
             </div>
-            
           </div>
         </div>
       </div>
             </div>
-
-
-            
-                
             </div>
         );
     }
 }
 
-export default DetailPages;
+const mapStateToProps = state =>{
+  return{
+    projects: state.pros,
+    advertisement: state.ad
+  }
+}
+export default connect(mapStateToProps, {getAD, getPROs})(DetailPages);

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { getADs } from './../../actions/adActions'
 import { connect } from 'react-redux'
+import {Link} from 'react-router-dom'
 
 class Product extends Component {
     constructor(props) {
@@ -258,7 +259,7 @@ class Product extends Component {
                         <p><b>Number of floors:</b> {ad.numfloors}</p>
                         <p><b>Price:</b> {this.format_currency(ad.price)} VND</p>
                         <p>
-                            <a className="btn btn-primary">Detail</a>
+                            <Link to={"/detail/" + ad._id} className="btn btn-primary">Detail</Link>
                         </p>
                     </div>
                 </div>
